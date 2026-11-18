@@ -14,3 +14,9 @@ paper_draft/*.synctex.gz
 paper_draft/preview/
 paper_draft/.buildcheck/
 datasets/
+paper_icml/*.aux
+paper_icml/*.log
+paper_icml/*.out
+paper_icml/*.bbl
+paper_icml/*.blg
+paper_icml/build.log

@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\caption{\textbf{Same frozen network, corrected vs.\ uncorrected.} Error after 50 autoregressive steps
+(Step-50 RelL2) and average spectral error over the rollout (Avg-50 PSRE); lower is better.
+Mean\,$\pm$\,sample standard deviation over three independently trained seeds; bold marks the better
+of the two columns. At $\nu=\nu_0$ the two methods are identical by construction. Navier--Stokes was not
+evaluated at $\nu/\nu_0=1.25$. Full horizon-wise results are in \cref{app:full_tables}.}
+\label{tab:main}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{@{}c cc cc cc cc@{}}
+\toprule
+& \multicolumn{4}{c}{2D Navier--Stokes, $64\times64$ (F-FNO)} & \multicolumn{4}{c}{1D viscous Burgers, 64 points (FNO)} \\
+\cmidrule(lr){2-5} \cmidrule(l){6-9}
+& \multicolumn{2}{c}{Step-50 RelL2} & \multicolumn{2}{c}{Avg-50 PSRE} & \multicolumn{2}{c}{Step-50 RelL2} & \multicolumn{2}{c}{Avg-50 PSRE} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(l){8-9}
+$\nu/\nu_0$ & Frozen & $+\Delta$ & Frozen & $+\Delta$ & Frozen & $+\Delta$ & Frozen & $+\Delta$ \\
+\midrule
+1 & 0.4091\std{0.0611} & 0.4091\std{0.0611} & 0.0408\std{0.0109} & 0.0408\std{0.0109} & 0.0517\std{0.0115} & 0.0517\std{0.0115} & 0.0233\std{0.0116} & 0.0233\std{0.0116} \\
+1.25 & -- & -- & -- & -- & 0.1390\std{0.0339} & \textbf{0.0425}\std{0.0125} & 0.0985\std{0.0330} & \textbf{0.0227}\std{0.0108} \\
+1.5 & 0.4331\std{0.0638} & \textbf{0.3796}\std{0.0612} & 0.0646\std{0.0266} & \textbf{0.0387}\std{0.0082} & 0.2618\std{0.0669} & \textbf{0.0409}\std{0.0098} & 0.2172\std{0.0818} & \textbf{0.0227}\std{0.0091} \\
+1.75 & 0.4511\std{0.0657} & \textbf{0.3728}\std{0.0621} & 0.0927\std{0.0289} & \textbf{0.0380}\std{0.0072} & 0.3990\std{0.1130} & \textbf{0.0417}\std{0.0089} & 0.3679\std{0.1626} & \textbf{0.0234}\std{0.0071} \\
+2 & 0.4721\std{0.0680} & \textbf{0.3682}\std{0.0632} & 0.1231\std{0.0310} & \textbf{0.0376}\std{0.0064} & 0.5507\std{0.1721} & \textbf{0.0444}\std{0.0120} & 0.5608\std{0.2912} & \textbf{0.0248}\std{0.0049} \\
+\bottomrule
+\end{tabular}
+\end{table*}

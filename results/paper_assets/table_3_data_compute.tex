@@ -13,6 +13,6 @@ Recast-style & 24 & 480 & 280.19 $\pm$ 2.92 & 8.81 & 70.08 $\pm$ 8.50 \\
 Cond. F-FNO & 120 & 2400 & 1275.70 $\pm$ 86.78 & 1.00 & 7.38 $\pm$ 0.32 \\
 \bottomrule
 \end{tabular}
-\caption{Data and compute comparison. Inference time is measured on CPU for one viscosity, eight trajectories, and 50 rollout steps at $\nu/\nu_0=2$. One-sided Delta-Physics and Equation-Recast-style reuse the Increment checkpoint and require no additional training. Abbreviations: $\Delta$-Physics denotes One-sided $\Delta$-Physics; Recast-style denotes Equation-Recast-style; Cond. F-FNO denotes Conditioned F-FNO. The first three methods use one training viscosity and 28,370 parameters, with no target-parameter training data; Cond. F-FNO uses five viscosities, target-parameter training data, and 28,386 parameters. Optimizer time excludes data generation.}
+\caption{Data and compute comparison. Inference time is measured on CPU for one viscosity, eight trajectories, and 50 rollout steps at $\nu/\nu_0=2$. One-sided $\Delta$-Physics and Equation-Recast-style reuse the Increment checkpoint and require no additional training. Abbreviations: $\Delta$-Physics denotes One-sided $\Delta$-Physics; Recast-style denotes Equation-Recast-style; Cond. F-FNO denotes Conditioned F-FNO. The first three methods use one training viscosity and 28,370 parameters, with no target-parameter training data; Cond. F-FNO uses five viscosities, target-parameter training data, and 28,386 parameters. Optimizer time excludes data generation.}
 \label{tab:data_compute}
 \end{table*}

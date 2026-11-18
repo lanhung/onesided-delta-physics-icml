@@ -23,10 +23,12 @@ The correction adds **zero additional learned parameters**, uses one neural eval
 | `run_burgers_high_viscosity_3seed.py` | Burgers training and paired evaluation |
 | `run_ffno_conditioned_multinu_3seed.py` | Multi-viscosity supervised baseline |
 | `run_ffno_equation_recast_3seed.py` | Dynamic-step Equation-Recast-style baseline |
-| `run_ffno_dense_viscosity_scan.py` | Two-sided low-resolution diagnostic (supplement) |
+| `run_ffno_dense_viscosity_scan.py` | Two-sided low-resolution diagnostic (supplement); its reference checkpoint is `results/ffno_physics_split_screen/increment.pt` |
 | `results/` | Configurations, seed-level and aggregate measurements, checkpoints, normalizers, diagnostics |
 | `results/paper_assets/` | Main/supplementary figures (PDF/SVG/PNG), tables (TeX/CSV/Markdown), spectral statistics |
 | `paper_draft/` | Manuscript, bibliography and compiled PDF |
+| `paper_icml/` | Reader-friendly ICML-format rewrite of the manuscript, with torch-free figure/table scripts (see its README) |
+| `.claude/skills/` | Paper-writing skills used for the rewrite (`ml-paper-writing`, vendored under MIT; `readable-sciml-paper`) |
 | `export_datasets.py` | Export the exact configured synthetic train/validation/test datasets |
 | `MANIFEST.sha256` | Integrity hashes for the publication snapshot |
 

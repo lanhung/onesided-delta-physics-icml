@@ -181,16 +181,16 @@ def figure_2_cross_pde():
     fig, axes = plt.subplots(1, 2, figsize=(11.4, 4.7), sharey=False)
     _improvement_panel(
         axes[0], NS / "aggregate_improvements.csv",
-        r"(a) 64$\times$64 Navier--Stokes",
+        r"(a) 64$\times$64 Navier–Stokes",
     )
     _improvement_panel(
         axes[1], BURGERS / "aggregate_improvements.csv",
         "(b) Viscous Burgers",
     )
     axes[0].set_ylabel(
-        r"One-sided $\Delta$-Physics improvement over Increment (\%)"
+        r"One-sided $\Delta$-Physics improvement over Increment (%)"
     )
-    axes[1].set_ylabel(r"Improvement over Increment (\%)")
+    axes[1].set_ylabel(r"Improvement over Increment (%)")
     axes[0].set_ylim(-1.5, 26)
     axes[1].set_ylim(-3, 100)
     handles, labels = axes[0].get_legend_handles_labels()
@@ -282,7 +282,7 @@ def figure_4_tradeoff():
     axes[1].set_xlim(0.4, 9.7)
     axes[0].set_ylabel("Average 50-step RelL2")
     fig.suptitle(
-        r"Accuracy--cost tradeoff at $\nu/\nu_0=2$ (64$\times$64 NS)"
+        r"Accuracy–cost tradeoff at $\nu/\nu_0=2$ (64$\times$64 NS)"
     )
     fig.tight_layout()
     save_figure(fig, "figure_4_accuracy_cost")
@@ -408,7 +408,7 @@ def figure_s1_dense_two_sided():
         axis.grid(alpha=0.22)
     axes[0].set_title("(a) Full range: low-viscosity instability")
     axes[1].set_title("(b) Boundary zoom")
-    axes[0].set_ylabel(r"RelL2 improvement over Increment (\%)")
+    axes[0].set_ylabel(r"RelL2 improvement over Increment (%)")
     axes[1].set_ylim(-20, 30)
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper center", ncol=4, frameon=True,
@@ -502,7 +502,8 @@ def latex_table(rows, caption, label):
         r"\begin{table*}[!htbp]", r"\centering", r"\small",
         r"\resizebox{\textwidth}{!}{%",
         rf"\begin{{tabular}}{{{alignment}}}", r"\toprule",
-        " & ".join(latex_escape(field) for field in fields) + r" \\",
+        " & ".join(r"$\nu/\nu_0$" if field == "nu/nu0" else latex_escape(field)
+                   for field in fields) + r" \\",
         r"\midrule",
     ]
     for row in rows:
@@ -753,7 +754,7 @@ def table_3_cost():
             rows,
             r"Data and compute comparison. Inference time is measured on CPU "
             r"for one viscosity, eight trajectories, and 50 rollout steps at "
-            r"$\nu/\nu_0=2$. One-sided Delta-Physics and Equation-Recast-style reuse the "
+            r"$\nu/\nu_0=2$. One-sided $\Delta$-Physics and Equation-Recast-style reuse the "
             r"Increment checkpoint and require no additional training.",
             "tab:data_compute",
         ), encoding="utf-8",
