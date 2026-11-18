@@ -56,7 +56,7 @@
 A neural PDE solver trained at one viscosity becomes inaccurate when it is asked about a fluid with a different viscosity, and the usual fix, simulating and training at the new value, is exactly the cost the solver was meant to avoid.
 We show that for a shift toward \emph{higher} viscosity no new data or training is needed.
 Viscosity enters the equations only through a linear diffusion term whose one-step effect is known in closed form, so we keep the trained network frozen and add the difference between the target and training diffusion propagators, computed with one FFT per step.
-We call this \method, as it is switched off for lower viscosities, where the same correction would amplify errors; it adds no parameters, keeps one network evaluation per step, and returns exactly the original model at the training viscosity.
+We call this \method, as it is switched off for lower viscosities, where in our tests the same correction degraded long rollouts; it adds no parameters, keeps one network evaluation per step, and returns exactly the original model at the training viscosity.
 At twice the training viscosity, it reduces the 50-step rollout error of a frozen F-FNO on 2D Navier--Stokes by 22\% and of a frozen FNO on 1D viscous Burgers by 92\%. It also matches an iterative zero-shot baseline to within 1\% while using about 9$\times$ fewer network evaluations.
 \end{abstract}
 
@@ -87,9 +87,9 @@ A network trained at $\nu_0$ has already learned to apply the $\nu_0$ version of
 So instead of asking the network to learn how its output should depend on $\nu$, we keep it frozen and add only the \emph{difference} between the $\nu$ and $\nu_0$ damping, a closed-form correction that costs one FFT per step.
 If the dynamics were purely diffusive and the network perfect, this correction would turn the $\nu_0$ solver into an exact $\nu$ solver.
 
-The correction is useful in only one direction.
+In our experiments the correction is useful in only one direction.
 Adding damping (for $\nu>\nu_0$) is benign.
-Removing damping (for $\nu<\nu_0$) amounts to running diffusion partly backwards, which sharpens whatever errors the network makes; in our experiments it improves the first step and then ruins long rollouts.
+For $\nu<\nu_0$ the same formula adds energy back at fine scales. It stays bounded, and with a perfect network it would still be exact, but with a real network it improves the first step and then ruins long rollouts.
 We therefore apply the correction only when $\nu>\nu_0$ and call the method \method.
 
 We test it on two PDEs and two backbones: 2D forced Navier--Stokes with a factorized FNO (F-FNO; \citealp{tran2023ffno}) and 1D viscous Burgers with an FNO \citep{li2021fno}.
@@ -101,8 +101,8 @@ A model trained with data at every test viscosity is still far more accurate, so
 \textbf{Contributions.}
 \begin{itemize}
   \setlength\itemsep{1pt}
-  \item A training-free way to transfer a frozen neural time-stepper to a higher viscosity: add the closed-form difference of two diffusion propagators after each network step (\cref{sec:method}). It has no parameters, recovers the original model exactly at $\nu_0$, and is exact for pure diffusion.
-  \item An explanation and an ablation of why this correction must be one-sided (\cref{sec:one_sided,sec:why_one_sided}).
+  \item A training-free way to transfer a frozen neural time-stepper to a higher viscosity: add the closed-form difference of two diffusion propagators after each network step (\cref{sec:method}). It has no parameters, recovers the original model exactly at $\nu_0$, and is exact for pure diffusion. A local error analysis shows what it misses: the interaction between the extra diffusion and the nonlinear dynamics (\cref{prop:local}).
+  \item An ablation showing that, in our setting, the correction should be applied only toward higher viscosity, and an account of what the sign of the correction does and does not imply (\cref{sec:one_sided,sec:why_one_sided}).
   \item Evidence on two PDEs and two neural-operator backbones that the gain grows with the shift and the horizon and targets the spectral mismatch, together with an accuracy--cost comparison against an iterative zero-shot baseline and multi-viscosity supervision (\cref{sec:results}).
 \end{itemize}
 The method covers one parameter, viscosity, that enters through a known linear dissipative term, and only shifts toward stronger dissipation; \cref{sec:limitations} lists the limits of our evidence.
@@ -225,11 +225,12 @@ The correction does not try to model how viscosity changes the nonlinear dynamic
 \label{sec:one_sided}
 
 For $\nu>\nu_0$ every Fourier multiplier in \cref{eq:fourier} is negative: the correction only removes energy, and removes more of it at fine scales.
-For $\nu<\nu_0$ the sign flips and the correction \emph{injects} energy, mostly at fine scales.
-That is a partial reversal of diffusion, the classic ill-posed direction, and it amplifies any high-frequency error the network makes.
-One step may still improve, but over a rollout the amplified errors feed back on themselves.
-\Cref{sec:why_one_sided} confirms this empirically.
+For $\nu<\nu_0$ the sign flips and the correction \emph{adds} energy, mostly at fine scales.
+This is not the ill-posed backward heat equation: the multipliers then lie between 0 and 1, so the correction stays bounded, and with a perfect network the corrected step would still be the exact solver at $\nu$ (\cref{prop:properties}(ii) holds in both directions without the indicator).
+What changes is that the correction now adds back a fraction of the current state's fine-scale content, including whatever errors the network has accumulated there.
+Whether this is harmful depends on the network, so we settled it empirically: in \cref{sec:why_one_sided} the two-sided correction improves the first step below $\nu_0$ and then degrades long rollouts.
 Hence the indicator in \cref{eq:delta_physics}: below $\nu_0$ we fall back to the unchanged network.
+The one-sided rule is an empirical policy for dissipative transfer, not a proven requirement.
 
 \subsection{Properties}
 \label{sec:properties}
@@ -237,12 +238,30 @@ Hence the indicator in \cref{eq:delta_physics}: below $\nu_0$ we fall back to th
 \begin{proposition}[Safe by construction]
 \label{prop:properties}
 (i) At $\nu=\nu_0$ the corrected stepper equals $\Phi_\theta$ exactly.
-(ii) If $\mathcal{N}=0$ and $\Phi_\theta=S_{\nu_0}$, then for every $\nu>\nu_0$ the corrected stepper equals $S_\nu$.
+(ii) If $\mathcal{N}=0$ and $\Phi_\theta=S_{\nu_0}$, then for every $\nu>\nu_0$ the corrected stepper equals $S_\nu$ (without the indicator, also for $\nu<\nu_0$).
 (iii) If $\mathcal{L}$ is self-adjoint and negative semidefinite and $\nu\ge\nu_0$, then $\langle u,(S_\nu-S_{\nu_0})u\rangle\le 0$ for all $u$, so the correction never adds energy.
 \end{proposition}
 The proofs are one line each (\cref{app:proofs}).
 Property (iii) concerns the correction alone.
 It is \emph{not} a stability guarantee for the full learned rollout, which also depends on the network.
+
+\textbf{What the correction misses.}
+Adding the propagator difference is one way to attach the known physics to the network; composing them, as in operator splitting \citep{strang1968construction,mclachlan2002splitting}, is another.
+With $h=\Delta t$ and $B=(\nu-\nu_0)\mathcal{L}$, compare the additive step $\Phi_{\mathrm{add}}=\Phi_\theta+(S_\nu-S_{\nu_0})$ with the Lie step $\Phi_{\mathrm{Lie}}=e^{hB}\Phi_\theta$ and the Strang step $\Phi_{\mathrm{Str}}=e^{hB/2}\,\Phi_\theta\,e^{hB/2}$.
+\begin{proposition}[Local error with an exact reference step]
+\label{prop:local}
+For the spatially discretised system with smooth $\mathcal{N}$, let $\varphi^h_\nu$ be the exact flow at viscosity $\nu$ and suppose $\Phi_\theta=\varphi^h_{\nu_0}$. Then, at fixed resolution,
+\begin{align*}
+\varphi^h_\nu-\Phi_{\mathrm{add}} &= \tfrac{h^2}{2}\,(\mathcal{N}'B+B\mathcal{N})+O(h^3),\\
+\varphi^h_\nu-\Phi_{\mathrm{Lie}} &= \tfrac{h^2}{2}\,(\mathcal{N}'B-B\mathcal{N})+O(h^3),\\
+\varphi^h_\nu-\Phi_{\mathrm{Str}} &= O(h^3),
+\end{align*}
+where $(\mathcal{N}'B\pm B\mathcal{N})(u)=\mathcal{N}'(u)Bu\pm B\mathcal{N}(u)$.
+\end{proposition}
+The proof is a Taylor expansion (\cref{app:proofs}); a numerical check on a small nonlinear system is included with the code.
+The additive correction is exact for the linear part but leaves the whole interaction between the extra diffusion and the nonlinear dynamics uncorrected at second order; in the Lie step the two interaction terms partly cancel, and the Strang step removes them at this order.
+These statements assume an exact reference step.
+A trained network is not exact, and the pre-damping in the Strang step feeds it states it never saw in training, so which form works best for a \emph{frozen} network is an empirical question that we have not yet answered (\cref{sec:limitations}).
 
 \textbf{Cost.} Training is unchanged and uses only $\nu_0$ data.
 At test time each step costs one network evaluation plus an FFT pair, $O(N\log N)$ for $N$ grid points.
@@ -271,7 +290,7 @@ Because the correction acts on the spectrum, we also report the power-spectrum r
 
 \textbf{Comparisons.}
 (1)~The \emph{frozen network} (Increment), which is our direct baseline because \method only adds a term to it.
-(2)~A \emph{Recast-style} zero-shot baseline, our adaptation of equation recasting \citep{cheng2026mdpnop,cheng2026recast} to a time-stepper: it feeds the viscosity difference through the network and iterates to a fixed point (\cref{app:recast}). It is not an official implementation of either method.
+(2)~A \emph{Recast-style} zero-shot baseline, our adaptation of equation recasting \citep{cheng2026mdpnop,cheng2026recast} to a time-stepper: it feeds the viscosity difference through the network, re-evaluating the network at every iteration until a fixed point is reached (\cref{app:recast}). It is not an official implementation of either method.
 (3)~A \emph{conditioned F-FNO} trained on five viscosities that include every test value: an upper reference that uses the target data we assume are unavailable.
 
 %% ============================================================
@@ -334,9 +353,9 @@ The spectral errors fall proportionally more than the state errors, consistent w
 To test the symmetric version, we applied the two-sided correction (without the indicator) across $\nu/\nu_0\in[0.5,2]$.
 This is a separate diagnostic with a single seed on a $24\times24$ grid, not part of the three-seed $64\times64$ experiments (\cref{app:two_sided}).
 Above $\nu_0$ it reproduces the monotone gains seen above.
-Below $\nu_0$ it behaves as \cref{sec:one_sided} predicts: at $\nu/\nu_0=0.5$ it improves step 1 by $10.53\%$, but turns negative by step 20 and reaches $-296.76\%$ at step 50.
+Below $\nu_0$ it behaves as \cref{sec:one_sided} anticipates: at $\nu/\nu_0=0.5$ it improves step 1 by $10.53\%$, but turns negative by step 20 and reaches $-296.76\%$ at step 50.
 Step-50 changes at $\nu/\nu_0=0.625$, $0.75$ and $0.875$ are $-52.29\%$, $-14.53\%$ and $-5.06\%$.
-The anti-dissipative correction helps for a step and then amplifies error under recursion, so we switch it off.
+The energy-adding correction helps for a step and then degrades the rollout, so we switch it off. Because this is one seed at one resolution, the one-sided rule should be read as an empirical policy rather than a proven necessity.
 
 \subsection{What do stronger alternatives cost?}
 \label{sec:alternatives}
@@ -377,13 +396,14 @@ DISCO infers an evolution operator from trajectory context with a hypernetwork \
 Both adapt without retraining but require target observations.
 Closest to us are MD-PNOP and Equation Recast \citep{cheng2026mdpnop,cheng2026recast}, which derive parameter-induced operator changes from the governing equation, absorb them into effective source terms and solve the recast problem iteratively with a canonical operator, including zero-shot prediction in new parameter regimes.
 Analytical, zero-shot parameter transfer is therefore not new in itself.
-Our contribution is narrower: for an autoregressive time-stepper and a parameter that enters through a known linear dissipative term, the correction can be applied \emph{outside} the network in a single closed-form pass, and it must be one-sided.
+Our contribution is narrower: for an autoregressive time-stepper and a parameter that enters through a known linear dissipative term, the correction can be applied \emph{outside} the network in a single closed-form pass, and, empirically, it should be one-sided.
 Our Recast-style adaptation (\cref{sec:alternatives}) suggests that, in this setting, the single pass loses less than 1\% accuracy relative to iterating while saving roughly 9$\times$ in network evaluations.
 
 \textbf{Physics inside or around the learner.}
 Physics-informed operators constrain training with equation residuals \citep{wang2021physicsdeeponet,li2024pino}, and hybrid solvers train learned corrections inside a numerical scheme \citep{um2020solverintheloop,kochkov2021mlcfd}.
 Post-hoc corrections enforce invariants of a learned update \citep{mcgreivy2023invariants}; \citet{li2022chaotic} promote dissipativity in learned chaotic dynamics; and Deep-OSG builds the semigroup property into training \citep{chen2023deeposg}.
-Exponential integrators use the exact propagator of the linear part of stiff problems \citep{hochbruck2010exponential}, and our correction borrows that structure.
+Exponential integrators use the exact propagator of the linear part of stiff problems \citep{hochbruck2010exponential}, and our correction borrows that structure; operator splitting composes the exact flows of the parts of a vector field \citep{strang1968construction,mclachlan2002splitting}.
+\citet{gopakumar2026physical} build splitting into training, learning separate neural operators for the nonlinear physical operators while representing the linear operators with fixed finite-difference convolutions.
 Unlike these methods, we leave training and the network untouched and use the propagator only to transfer an already trained model to a new parameter.
 
 \textbf{Long-rollout accuracy.}
@@ -396,10 +416,10 @@ Our results fit this picture: the missing damping is small per step and concentr
 
 \begin{itemize}
   \setlength\itemsep{1pt}
-  \item \textbf{One direction.} The method only handles shifts to higher viscosity. Lower viscosity, which is often the more interesting regime, falls back to the unchanged model.
+  \item \textbf{One direction.} The method only handles shifts to higher viscosity. Lower viscosity, which is often the more interesting regime, falls back to the unchanged model, and the one-sided rule rests on a single-seed, low-resolution scan rather than on theory.
   \item \textbf{Known linear operator.} The correction requires the parameter to enter through a known linear dissipative operator; we validate only the periodic Laplacian. It does not model how viscosity changes the nonlinear dynamics.
   \item \textbf{Scale of the evidence.} Two PDEs on small grids ($64\times64$, 64 points), small training sets, viscosity ratios up to 2, and reference models trained for 15 epochs. The training-budget check and the two-sided scan each use one seed.
-  \item \textbf{Baselines.} The Recast-style baseline is our own adaptation, not an official implementation. The conditioned baseline receives more optimizer updates. We do not compare against operator-splitting variants of the correction or against few-shot fine-tuning.
+  \item \textbf{Baselines.} The Recast-style baseline is our own adaptation, not an official implementation. The conditioned baseline receives more optimizer updates. We have not yet compared against other one-evaluation ways of attaching the known physics (Lie or Strang splitting, an implicit post-step diffusion), which \cref{prop:local} suggests may be more accurate when the network is accurate, nor against few-shot fine-tuning.
   \item \textbf{No stability guarantee.} \Cref{prop:properties}(iii) characterises the correction alone, not the full nonlinear rollout.
 \end{itemize}
 
@@ -420,7 +440,7 @@ We are not aware of other direct negative societal consequences.
 \section*{Software and Data}
 Code, frozen checkpoints, per-seed results and the scripts that generate every figure and table will be released (anonymised for review). All data are synthetic and produced by the included solvers.
 
-\bibliography{../paper_draft/references}
+\bibliography{../paper_draft/references,references_extra}
 \bibliographystyle{icml2026}
 
 %% ============================================================
@@ -428,7 +448,7 @@ Code, frozen checkpoints, per-seed results and the scripts that generate every f
 \appendix
 \onecolumn
 
-\section{Proofs of \texorpdfstring{\cref{prop:properties}}{Proposition 1}}
+\section{Proofs}
 \label{app:proofs}
 
 \emph{(i)} At $\nu=\nu_0$ the indicator in \cref{eq:delta_physics} is zero, and in any case $S_\nu-S_{\nu_0}=0$, so the corrected step equals $\Phi_\theta$.
@@ -440,7 +460,22 @@ For the periodic Laplacian this is Parseval's identity with $\lambda=-|k|^2$:
 \begin{equation*}
   \langle u,(S_\nu-S_{\nu_0})u\rangle=\sum_k\big(e^{-\nu|k|^2\Delta t}-e^{-\nu_0|k|^2\Delta t}\big)|\hat u(k)|^2\le0 .
 \end{equation*}
-For $\nu<\nu_0$ every multiplier changes sign and the correction is anti-dissipative, which motivates the one-sided rule. The ratio $S_\nu(k)/S_{\nu_0}(k)=\exp[-(\nu-\nu_0)|k|^2\Delta t]$ decreases with $|k|$ for $\nu>\nu_0$, so relative attenuation is strongest at fine scales. The absolute multiplier in \cref{eq:fourier} is not monotone in $|k|$, since both exponentials vanish at sufficiently high frequency.
+For $\nu<\nu_0$ every multiplier changes sign, so the correction adds energy. The multipliers then lie in $[0,1)$, so $\|S_\nu-S_{\nu_0}\|\le1$: unlike the backward heat propagator $e^{-(\nu-\nu_0)|k|^2\Delta t}$, the correction is bounded. The one-sided rule therefore rests on the empirical scan of \cref{sec:why_one_sided}, not on this sign. The ratio $S_\nu(k)/S_{\nu_0}(k)=\exp[-(\nu-\nu_0)|k|^2\Delta t]$ decreases with $|k|$ for $\nu>\nu_0$, so relative attenuation is strongest at fine scales. The absolute multiplier in \cref{eq:fourier} is not monotone in $|k|$, since both exponentials vanish at sufficiently high frequency.
+
+\textbf{Proof of \cref{prop:local}.}
+On the spatially discretised state space all maps are smooth and $\mathcal{L}$ and $B$ are bounded, so we may expand in $h$ at fixed $u$; all terms below are evaluated at $u$. For a vector field $G$ with flow $\psi^h$, $\psi^h(u)=u+hG+\tfrac{h^2}{2}G'G+O(h^3)$. With $G=F_\nu=F_0+B$, where $F_0=\nu_0\mathcal{L}+\mathcal{N}$ and $F_\nu'=F_0'+B$,
+\begin{equation*}
+\varphi^h_\nu(u)=u+hF_0+hBu+\tfrac{h^2}{2}\big[F_0'F_0+F_0'Bu+BF_0+B^2u\big]+O(h^3).
+\end{equation*}
+The reference step is $\Phi_\theta(u)=\varphi^h_{\nu_0}(u)=u+hF_0+\tfrac{h^2}{2}F_0'F_0+O(h^3)$.
+
+\emph{Additive.} Because $\mathcal{L}$ and $B$ commute, $S_\nu-S_{\nu_0}=e^{h\nu_0\mathcal{L}}(e^{hB}-I)=hB+\tfrac{h^2}{2}(2\nu_0\mathcal{L}B+B^2)+O(h^3)$. Subtracting $\Phi_{\mathrm{add}}(u)$ leaves $\tfrac{h^2}{2}[F_0'Bu+BF_0-2\nu_0\mathcal{L}Bu]$. With $F_0'=\nu_0\mathcal{L}+\mathcal{N}'$ and $BF_0=\nu_0\mathcal{L}Bu+B\mathcal{N}$, this equals $\tfrac{h^2}{2}[\mathcal{N}'(u)Bu+B\mathcal{N}(u)]$.
+
+\emph{Lie.} $e^{hB}\Phi_\theta(u)=u+hF_0+hBu+\tfrac{h^2}{2}[F_0'F_0+2BF_0+B^2u]+O(h^3)$, so the difference is $\tfrac{h^2}{2}[F_0'Bu-BF_0]=\tfrac{h^2}{2}[\mathcal{N}'(u)Bu-B\mathcal{N}(u)]$; the $\nu_0\mathcal{L}B$ terms cancel because $\mathcal{L}$ and $B$ commute.
+
+\emph{Strang.} $\Phi_{\mathrm{Str}}$ is the symmetric composition of the exact flows of $Bu$ and $F_0$, whose local error is $O(h^3)$ \citep{strang1968construction,mclachlan2002splitting}.
+
+The constants in $O(h^3)$ grow with $\|B\|$, that is, with the shift and the resolution. A numerical check of all three expansions on a six-dimensional nonlinear system is part of the supplementary code (\texttt{check\_local\_error.py}).
 
 \section{Experimental details}
 \label{app:setup}
@@ -457,7 +492,7 @@ F-FNO: width 16, 8 retained modes per factorised Fourier branch, 8 residual laye
 \section{Recast-style baseline}
 \label{app:recast}
 
-Equation Recast and MD-PNOP were formulated for source-to-solution operators. Our model is a state-to-state time-stepper, so we use a dynamic, backward-Euler-style interpretation. Starting from $y^{(0)}=\Phi_\theta(u_t)$, we iterate the fixed-point map $G_\nu(y;u_t)=\Phi_\theta\big(u_t+\Delta t(\nu-\nu_0)\Delta y\big)$ with vector Aitken relaxation on the residual $r^{(k)}=G_\nu(y^{(k)};u_t)-y^{(k)}$, until the relative residual falls below $10^{-5}$ or 30 iterations are reached. At $\nu=\nu_0$ it reduces to one evaluation of the frozen model. \Cref{tab:recast_convergence} gives the convergence diagnostics.
+Equation Recast and MD-PNOP were formulated for source-to-solution operators. Our model is a state-to-state time-stepper, so we use a dynamic, backward-Euler-style interpretation. Starting from $y^{(0)}=\Phi_\theta(u_t)$, we iterate the fixed-point map $G_\nu(y;u_t)=\Phi_\theta\big(u_t+\Delta t(\nu-\nu_0)\Delta y\big)$ with vector Aitken relaxation on the residual $r^{(k)}=G_\nu(y^{(k)};u_t)-y^{(k)}$, until the relative residual falls below $10^{-5}$ or 30 iterations are reached. Because $y$ enters the network's \emph{input}, every iteration needs a new network evaluation, which is why the baseline averages 8.81 evaluations per step. Adding the viscosity term outside the network instead, $y=\Phi_\theta(u_t)+\Delta t(\nu-\nu_0)\Delta y$, gives a different method, an implicit post-step diffusion $y=(I-\Delta t(\nu-\nu_0)\Delta)^{-1}\Phi_\theta(u_t)$ that needs one evaluation; it is among the variants not yet compared (\cref{sec:limitations}). At $\nu=\nu_0$ it reduces to one evaluation of the frozen model. \Cref{tab:recast_convergence} gives the convergence diagnostics.
 
 \input{../results/paper_assets/table_s1_recast_convergence.tex}
 

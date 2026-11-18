@@ -10,10 +10,12 @@ when it is). The results are unchanged: every number comes from `../results/`.
 | `make_icml_figures.py` | Figures 1, 3, 4, A1, A2 from the result CSVs (numpy + matplotlib only, no torch) |
 | `make_icml_tables.py` | Tables 1 and 2 from the result CSVs |
 | `check_numbers.py` | Flags any number in `main.tex` not found in the old draft or `results/` |
+| `check_local_error.py` | Numerical check of Proposition 2 (local error of additive, Lie and Strang corrections; numpy + scipy) |
+| `references_extra.bib` | References added in this revision (classical splitting; Gopakumar et al. 2026), verified online |
 | `figures/`, `tables/` | Generated outputs |
 
 Figure 2 (method diagram) is TikZ inside `main.tex`. The appendix reuses the full-horizon and
-convergence tables from `../results/paper_assets/`. The bibliography is `../paper_draft/references.bib`.
+convergence tables from `../results/paper_assets/`. The bibliography is `../paper_draft/references.bib` plus `references_extra.bib`.
 
 Build:
 

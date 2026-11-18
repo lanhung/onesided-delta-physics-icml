@@ -23,6 +23,7 @@ The correction adds **zero additional learned parameters**, uses one neural eval
 | `run_burgers_high_viscosity_3seed.py` | Burgers training and paired evaluation |
 | `run_ffno_conditioned_multinu_3seed.py` | Multi-viscosity supervised baseline |
 | `run_ffno_equation_recast_3seed.py` | Dynamic-step Equation-Recast-style baseline |
+| `run_splitting_baselines.py` | Not yet run: compares Δ-Physics with Lie, Strang, implicit and explicit one-evaluation corrections on the existing frozen checkpoints (NS and Burgers); see its docstring |
 | `run_ffno_dense_viscosity_scan.py` | Two-sided low-resolution diagnostic (supplement); its reference checkpoint is `results/ffno_physics_split_screen/increment.pt` |
 | `results/` | Configurations, seed-level and aggregate measurements, checkpoints, normalizers, diagnostics |
 | `results/paper_assets/` | Main/supplementary figures (PDF/SVG/PNG), tables (TeX/CSV/Markdown), spectral statistics |
