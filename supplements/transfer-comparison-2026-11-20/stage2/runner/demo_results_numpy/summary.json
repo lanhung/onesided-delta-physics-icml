@@ -1,0 +1,329 @@
+{
+  "status": "completed",
+  "evidence_type": "numerical_control",
+  "completed_at_utc": "2026-11-20T00:21:57.047387+00:00",
+  "original_neural_experiment": false,
+  "independently_reconstructed_neural_experiment": false,
+  "timing_benchmark_performed": false,
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "backend": "numpy",
+    "device": "cpu"
+  },
+  "config": {
+    "schema_version": 1,
+    "evidence_type": "numerical_control",
+    "backend": "numpy",
+    "device": "cpu",
+    "dtype": "float64",
+    "target_trajectory_tuning_allowed": false,
+    "h": 0.02,
+    "nu0": 0.005,
+    "nu": 0.01,
+    "lengths": [
+      1.0,
+      1.5
+    ],
+    "spatial_shape": [
+      16,
+      12
+    ],
+    "channels": 1,
+    "horizon_steps": 20,
+    "methods": [
+      "frozen",
+      "delta",
+      "explicit",
+      "lie_post",
+      "lie_pre",
+      "strang",
+      "implicit"
+    ],
+    "ic_seeds": [
+      0,
+      1,
+      2
+    ],
+    "training_seed": null,
+    "failure_max_abs": 10000.0,
+    "delta_one_sided": true,
+    "adapter": {
+      "path": "../heat_adapter.py"
+    },
+    "dataset": {
+      "path": "heat_target.npz",
+      "sha256": "6aedb3d8b3731c21b831775fdbbbe81b58c4fc857abbf264401f150109f8ecd0"
+    },
+    "dataset_metadata": {
+      "path": "heat_target.json",
+      "sha256": "b926c6000b65a1e2b6f292be4b24d77aea3706b61968a5f73f901d82bd76697d"
+    },
+    "reference_dtype": "float64"
+  },
+  "provenance": {
+    "config": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/demo/config_numpy.json",
+      "sha256": "153cd12a6506e95e98db705acbd3c5b2868c04f5cdb4a0547a159b3bfbcd263a"
+    },
+    "runner": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/evaluate.py",
+      "sha256": "c32d93a3deed4bc8d42cf18bb48b564d56449ffe05a84827d583b5a23bf618a7"
+    },
+    "transfer_wrapper": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/shared/spectral_transfer_numpy.py",
+      "sha256": "d434cb0dba75c9ca469c989e30f45c9c54f7ec2146377a3407156975dcbc5727"
+    },
+    "dataset": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/demo/heat_target.npz",
+      "sha256": "6aedb3d8b3731c21b831775fdbbbe81b58c4fc857abbf264401f150109f8ecd0",
+      "size_bytes": 93349
+    },
+    "dataset_metadata": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/demo/heat_target.json",
+      "sha256": "b926c6000b65a1e2b6f292be4b24d77aea3706b61968a5f73f901d82bd76697d",
+      "size_bytes": 489
+    },
+    "adapter": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/heat_adapter.py",
+      "sha256": "a4f03ffa1251afaa5f74f4ab875a5a0108a4885349035d1577bc09566c3a07c2"
+    }
+  },
+  "dataset_metadata": {
+    "h": 0.02,
+    "nu": 0.01,
+    "lengths": [
+      1.0,
+      1.5
+    ],
+    "spatial_shape": [
+      16,
+      12
+    ],
+    "channels": 1,
+    "units": "physical",
+    "includes_initial_state": true,
+    "dtype": "float64",
+    "generator": "analytic Fourier heat semigroup evaluated directly from initial state at every output time",
+    "reference_accuracy_status": "exact finite-grid heat flow up to floating-point FFT/exponential roundoff",
+    "projection_policy": "none; periodic grid, no repeated endpoint"
+  },
+  "predictor_metadata": {
+    "evidence_type": "numerical_control",
+    "h": 0.02,
+    "nu0": 0.005,
+    "lengths": [
+      1.0,
+      1.5
+    ],
+    "evaluation_spatial_shape": [
+      16,
+      12
+    ],
+    "channels": 1,
+    "dtype": "float64",
+    "backend": "numpy",
+    "units": "physical",
+    "output_kind": "full_next_state",
+    "stateless": true,
+    "sample_independent": true,
+    "projection_policy": "none; exact full-grid heat semigroup",
+    "predictor_kind": "analytical_heat_semigroup_no_network"
+  },
+  "metric_definitions": {
+    "metric_accumulation_dtype": "float64; the reference trajectory retains reference_dtype, only initial inference state is cast to dtype",
+    "absolute_l2": "sqrt(product(lengths)/spatial_grid_count * sum_over_channels_and_grid(error**2))",
+    "relative_l2": "absolute_l2 / reference_l2; zero denominator is always null with explicit status, including 0/0; absolute_l2 remains available",
+    "psre": "||abs(fftn(pred,norm=forward))**2-abs(fftn(truth,norm=forward))**2||_2 / ||abs(fftn(truth,norm=forward))**2||_2; channels and all full-FFT modes pooled",
+    "avg": "uniform mean over requested time steps 1..T and paired initial conditions; initial state excluded"
+  },
+  "limitations": [
+    "Metadata declarations and hashes identify artifacts; they do not prove model provenance or absence of target-data tuning.",
+    "Accuracy runner includes CPU metric collection for Torch and must not be used as a GPU latency benchmark.",
+    "Original input-Recast/Aitken is intentionally unavailable until its exact implementation is supplied."
+  ],
+  "summaries": [
+    {
+      "method": "frozen",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.2545668649012658,
+      "final_relative_l2": 0.45307374225603286,
+      "avg_absolute_l2": 0.18150347451959364,
+      "final_absolute_l2": 0.2573217864071397,
+      "avg_psre": 0.5794662290658198,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "delta",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 1.7022761243650467e-15,
+      "final_relative_l2": 3.242039964209733e-15,
+      "avg_absolute_l2": 1.2304730858369484e-15,
+      "final_absolute_l2": 1.8689621146982602e-15,
+      "avg_psre": 3.178842058124202e-15,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "explicit",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.009882861940336067,
+      "final_relative_l2": 0.014333668108951416,
+      "avg_absolute_l2": 0.007086992841656305,
+      "final_absolute_l2": 0.00793809633678523,
+      "avg_psre": 0.016494109270983298,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "lie_post",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 3.277082356712366e-15,
+      "final_relative_l2": 6.332965716532082e-15,
+      "avg_absolute_l2": 2.3557354362610667e-15,
+      "final_absolute_l2": 3.643638876529317e-15,
+      "avg_psre": 6.178960914729535e-15,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "lie_pre",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 3.277082356712366e-15,
+      "final_relative_l2": 6.332965716532082e-15,
+      "avg_absolute_l2": 2.3557354362610667e-15,
+      "final_absolute_l2": 3.643638876529317e-15,
+      "avg_psre": 6.178960914729535e-15,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "strang",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 5.192270861803251e-15,
+      "final_relative_l2": 9.877804695631988e-15,
+      "avg_absolute_l2": 3.776314223535496e-15,
+      "final_absolute_l2": 5.722025200216936e-15,
+      "avg_psre": 1.0270089685547538e-14,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "implicit",
+      "evidence_type": "numerical_control",
+      "training_seed": null,
+      "trajectory_count": 3,
+      "steps": 20,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "heat_ic_0": null,
+        "heat_ic_1": null,
+        "heat_ic_2": null
+      },
+      "callback_calls": 20,
+      "actual_network_forward_calls": null,
+      "requested_sample_steps": 60,
+      "arithmetic_sample_slots_including_failed_placeholders": 60,
+      "successful_sample_steps": 60,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.0031272654019491356,
+      "final_relative_l2": 0.0045959862217484744,
+      "avg_absolute_l2": 0.0022398294627335408,
+      "final_absolute_l2": 0.0025468896559800074,
+      "avg_psre": 0.005314361964238048,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    }
+  ]
+}

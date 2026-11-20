@@ -1,0 +1,7 @@
+# Recorded execution environment: Python 3.12.14 on Linux x86_64.
+# Observed PyTorch build: 2.7.1+cpu. Choose the appropriate official PyTorch
+# CPU/CUDA wheel for your machine; no CUDA experiment was run in this package.
+numpy==2.3.5
+scipy==1.17.0
+matplotlib==3.10.8
+torch==2.7.1

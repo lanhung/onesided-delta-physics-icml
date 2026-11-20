@@ -1,0 +1,16 @@
+{
+  "status": "rejected_preliminary_run_not_accepted_accuracy_results",
+  "reason": "source predictor refinement exceeded predeclared 1e-7 gate on explicit path",
+  "source_predictor_dt": 0.005,
+  "probe_fine_dt": 0.0025,
+  "max_source_probe_refinement_relative_error": 1.9202716638761225e-07,
+  "case": {
+    "grid": 64,
+    "ratio": 1.5,
+    "method": "explicit",
+    "output_step": 50
+  },
+  "action": "halve source step uniformly for every method to .0025 and rerun entire matrix",
+  "rankings_used_to_choose_change": false,
+  "preliminary_convergence_file_sha256": "068cd71fb8d24eec741a4d8a28e4ef76c10f6b709b51dd02e605f1d9adb27ff2"
+}

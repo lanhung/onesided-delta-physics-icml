@@ -1,0 +1,19 @@
+{
+  "h": 0.02,
+  "nu": 0.01,
+  "lengths": [
+    1.0,
+    1.5
+  ],
+  "spatial_shape": [
+    16,
+    12
+  ],
+  "channels": 1,
+  "units": "physical",
+  "includes_initial_state": true,
+  "dtype": "float64",
+  "generator": "analytic Fourier heat semigroup evaluated directly from initial state at every output time",
+  "reference_accuracy_status": "exact finite-grid heat flow up to floating-point FFT/exponential roundoff",
+  "projection_policy": "none; periodic grid, no repeated endpoint"
+}

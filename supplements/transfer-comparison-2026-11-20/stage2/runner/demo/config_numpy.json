@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_type": "numerical_control",
+  "backend": "numpy",
+  "device": "cpu",
+  "dtype": "float64",
+  "target_trajectory_tuning_allowed": false,
+  "h": 0.02,
+  "nu0": 0.005,
+  "nu": 0.01,
+  "lengths": [
+    1.0,
+    1.5
+  ],
+  "spatial_shape": [
+    16,
+    12
+  ],
+  "channels": 1,
+  "horizon_steps": 20,
+  "methods": [
+    "frozen",
+    "delta",
+    "explicit",
+    "lie_post",
+    "lie_pre",
+    "strang",
+    "implicit"
+  ],
+  "ic_seeds": [
+    0,
+    1,
+    2
+  ],
+  "training_seed": null,
+  "failure_max_abs": 10000.0,
+  "delta_one_sided": true,
+  "adapter": {
+    "path": "../heat_adapter.py"
+  },
+  "dataset": {
+    "path": "heat_target.npz",
+    "sha256": "6aedb3d8b3731c21b831775fdbbbe81b58c4fc857abbf264401f150109f8ecd0"
+  },
+  "dataset_metadata": {
+    "path": "heat_target.json",
+    "sha256": "b926c6000b65a1e2b6f292be4b24d77aea3706b61968a5f73f901d82bd76697d"
+  }
+}

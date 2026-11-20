@@ -11,6 +11,14 @@ u_{t+1}=u_t+F_\theta(u_t)+\mathbf{1}_{\nu>\nu_0}(S_\nu-S_{\nu_0})u_t,
 
 The correction adds **zero additional learned parameters**, uses one neural evaluation per physical step, and exactly preserves the reference predictor when bypassed. It does not guarantee energy decay or global stability of the complete neural predictor.
 
+## Supplementary transfer comparisons — 2026-11-20
+
+The [supplementary comparison package](supplements/transfer-comparison-2026-11-20/README.md) adds the subsequent mathematical audit, executable NumPy/PyTorch correction wrappers, independent three-seed Burgers FNO experiments, 64/128-grid NS numerical controls, CPU solver comparisons, and the next-experiment protocol. It includes checkpoints, datasets, complete neural rollouts, per-step metrics, raw timings, figures, and integrity manifests. Start with the [findings](supplements/transfer-comparison-2026-11-20/FINDINGS.md) or the [full Chinese report](supplements/transfer-comparison-2026-11-20/stage2/delta_physics_stage2_report_zh.txt).
+
+These added measurements use **independently reconstructed Burgers models and numerical NS reference flows**. They are not new evaluations of the manuscript's original F-FNO checkpoints. In the reconstructed Burgers experiment, Strang and closed-form implicit corrections improve Avg-50 over the additive correction at viscosity ratio 2; the endpoint ranking differs. The measured small-grid CPU solver is also a necessary efficiency baseline. See the linked findings for values, uncertainty, and scope.
+
+The closed-form **output** implicit correction and this repository's nonlinear **input** Recast/Aitken baseline solve different equations. Their distinction, the reviewed manuscript version, and historical statements about unavailable assets are documented in [import notes](supplements/transfer-comparison-2026-11-20/IMPORT_NOTES.md). The original manuscript and original experiment artifacts remain available in their existing locations.
+
 ## Contents
 
 | Path | Purpose |
@@ -31,6 +39,7 @@ The correction adds **zero additional learned parameters**, uses one neural eval
 | `paper_icml/` | Reader-friendly ICML-format rewrite of the manuscript, with torch-free figure/table scripts (see its README) |
 | `.claude/skills/` | Paper-writing skills used for the rewrite (`ml-paper-writing`, vendored under MIT; `readable-sciml-paper`) |
 | `export_datasets.py` | Export the exact configured synthetic train/validation/test datasets |
+| `supplements/transfer-comparison-2026-11-20/` | Mathematical audit, independent transfer comparisons, full evidence, code and extension plans |
 | `MANIFEST.sha256` | Integrity hashes for the publication snapshot |
 
 Some shared modules retain historical model utilities because the frozen experiment scripts import them. They are not additional components of the final method. Third-party repository clones and unrelated exploratory experiments are excluded.

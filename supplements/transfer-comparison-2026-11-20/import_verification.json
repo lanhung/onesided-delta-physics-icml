@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-20",
+  "date_timezone": "Asia/Shanghai",
+  "scope": "Import integrity and focused execution checks from the cloned repository; archived scientific measurements were not rerun.",
+  "source_payload_hash_checks": {
+    "stage1": {
+      "checked": 18,
+      "matched": 18
+    },
+    "stage2": {
+      "checked": 363,
+      "matched": 363
+    }
+  },
+  "manifest_files_preserved": true,
+  "analytical_cpu_checks": {
+    "command": "python validate_torch_cpu.py --out /workspace/scratch/137503518ac7/tmp/import_verification/torch_cpu_checks.json",
+    "exit_code": 0,
+    "summary": {
+      "evidence_type": "analytical_implementation_control",
+      "manuscript_checkpoint_tested": false,
+      "status": "passed",
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "torch": "2.7.1+cpu",
+      "device": "cpu",
+      "cuda_available": false,
+      "gpu_tests_executed": false,
+      "case_count": 168,
+      "max_relative_error_float32": 4.1207790112083034e-07,
+      "max_relative_error_float64": 4.840403551519968e-15,
+      "lower_viscosity_additive_relative_error": 2.6421994186757775e-16,
+      "guards": {
+        "implicit": "rejected_lower_viscosity",
+        "explicit": "rejected_lower_viscosity",
+        "lie_pre": "rejected_lower_viscosity",
+        "lie_post": "rejected_lower_viscosity",
+        "strang": "rejected_lower_viscosity",
+        "cuda_benchmark_with_cpu_input": "rejected"
+      }
+    },
+    "working_directory_relative_to_repository": "supplements/transfer-comparison-2026-11-20/stage2"
+  },
+  "runner_integration_checks": {
+    "command": "python check_runner.py",
+    "exit_code": 0,
+    "tests_run": 9,
+    "passed": 9,
+    "skipped": 0,
+    "working_directory_relative_to_repository": "supplements/transfer-comparison-2026-11-20/stage2/runner"
+  },
+  "scientific_training_rerun": false,
+  "accuracy_experiments_rerun": false,
+  "timing_benchmarks_rerun": false,
+  "gpu_tests_executed": false,
+  "original_neural_checkpoints_reproduced": false
+}

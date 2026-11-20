@@ -1,0 +1,50 @@
+{
+  "import_date": "2026-11-20",
+  "date_timezone": "Asia/Shanghai",
+  "target_repository": "https://github.com/lanhung/onesided-delta-physics-icml",
+  "repository_head_before_import": "32a2686933f304b6d2597c92c05606bfb2713eb5",
+  "import_mode": "additive supplement; byte-identical archived stage1 and stage2 files",
+  "source_snapshots": [
+    {
+      "path": "stage1",
+      "manifest": "execution_manifest.json",
+      "manifest_sha256": "e9356e5d5eb0901a6db1725db9503d0350ee43afd97e2356536a0e63f5ee3dca",
+      "files_including_manifest": 19,
+      "bytes_including_manifest": 1103363,
+      "source_manifest_hashes_preserved": true
+    },
+    {
+      "path": "stage2",
+      "manifest": "execution_manifest.json",
+      "manifest_sha256": "3226c2ce01e68ca456ea2713005509cb4c7f8bfc6c61f5dd276ff7120ae48d8a",
+      "files_including_manifest": 364,
+      "bytes_including_manifest": 128052108,
+      "source_manifest_hashes_preserved": true
+    }
+  ],
+  "reviewed_manuscript": {
+    "path": "reviewed_manuscript/onesided-delta-physics-icml-v2.pdf",
+    "sha256": "ca6f5da8564eb7287d14808be5633a09ff5495996a98e118696471219ecdc473",
+    "role": "User-provided manuscript used in the supplementary review and experiments"
+  },
+  "repository_manuscript_before_import": {
+    "path": "paper_draft/main.pdf",
+    "sha256": "e160e91ace2d86b1f2531a62ed21c0dd78e6511cfab5afc6d7b31b2c7e1dceb8",
+    "changed_by_import": false
+  },
+  "pre_import_repository_manifest_sha256": "59c27901a066e9c9b9a0df033e524b4274c3513fe6100a373722949c5c58430f",
+  "excluded_from_import": [
+    "duplicate ZIP archives",
+    "duplicate top-level tables and figures",
+    "__pycache__",
+    "*.pyc",
+    "*.log",
+    "ns_controls/preliminary_dt005",
+    "unrelated browser or session content",
+    "third-party full-text research papers"
+  ],
+  "historical_paths_note": "Absolute paths in archived runner summaries record the original execution workspace; they are not clone-relative input instructions.",
+  "original_neural_models_reproduced_during_import": false,
+  "model_training_performed_during_import": false,
+  "gpu_tests_performed_during_import": false
+}

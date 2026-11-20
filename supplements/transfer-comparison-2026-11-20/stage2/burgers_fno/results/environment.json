@@ -1,0 +1,12 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "numpy": "2.3.5",
+  "torch": "2.7.1+cpu",
+  "cuda_available": false,
+  "device_used": "cpu",
+  "threads": 2,
+  "deterministic_algorithms": true,
+  "timestamp_utc": "2026-11-20T00:18:22.822484+00:00",
+  "script_sha256": "3c917405577a61c56a2a486e38841d2cad95dad201b6f1e206d9e10a93385bb3"
+}

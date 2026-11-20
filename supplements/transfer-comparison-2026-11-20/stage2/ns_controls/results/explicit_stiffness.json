@@ -1,0 +1,62 @@
+{
+  "evidence_type": "analytic_diagnostic_for_numerical_reference_control",
+  "formula": "g(q) = R4(-nu0*q*dt)^n_internal - h*(nu-nu0)*q",
+  "R4": "1+z+z^2/2+z^3/6+z^4/24",
+  "rows": [
+    {
+      "grid": 64,
+      "ratio": 1.5,
+      "maximum_mode_z_h_delta_nu_q": 2.0212949813431007,
+      "max_abs_explicit_amplification_exact_heat_reference": 2.0037430267542247,
+      "max_abs_explicit_amplification_RK4_high_modes": 2.003741858160285,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    },
+    {
+      "grid": 64,
+      "ratio": 2.0,
+      "maximum_mode_z_h_delta_nu_q": 4.042589962686201,
+      "max_abs_explicit_amplification_exact_heat_reference": 4.025038008097326,
+      "max_abs_explicit_amplification_RK4_high_modes": 4.025036839503385,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    },
+    {
+      "grid": 64,
+      "ratio": 4.0,
+      "maximum_mode_z_h_delta_nu_q": 12.127769888058603,
+      "max_abs_explicit_amplification_exact_heat_reference": 12.110217933469727,
+      "max_abs_explicit_amplification_RK4_high_modes": 12.110216764875787,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    },
+    {
+      "grid": 128,
+      "ratio": 1.5,
+      "maximum_mode_z_h_delta_nu_q": 8.085179925372403,
+      "max_abs_explicit_amplification_exact_heat_reference": 8.085179830464593,
+      "max_abs_explicit_amplification_RK4_high_modes": 8.085179819074762,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    },
+    {
+      "grid": 128,
+      "ratio": 2.0,
+      "maximum_mode_z_h_delta_nu_q": 16.170359850744806,
+      "max_abs_explicit_amplification_exact_heat_reference": 16.170359755836998,
+      "max_abs_explicit_amplification_RK4_high_modes": 16.170359744447165,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    },
+    {
+      "grid": 128,
+      "ratio": 4.0,
+      "maximum_mode_z_h_delta_nu_q": 48.51107955223441,
+      "max_abs_explicit_amplification_exact_heat_reference": 48.5110794573266,
+      "max_abs_explicit_amplification_RK4_high_modes": 48.51107944593677,
+      "linearly_unstable_high_modes_present": true,
+      "interpretation": "A finite 50-step run does not establish stability; roundoff or predictor errors can seed growing high modes."
+    }
+  ],
+  "caution": "This quantifies modal instability, not an exact prediction of nonlinear failure time or a result for trained networks."
+}

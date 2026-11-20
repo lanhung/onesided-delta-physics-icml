@@ -1,0 +1,15 @@
+{
+  "training_seed": 1,
+  "completed_epochs": 75,
+  "selected_epoch": 75,
+  "selected_source_validation_rel_l2": 0.0025344800277530047,
+  "checkpoint_path": "seed_1/best_source_validation.pt",
+  "checkpoint_sha256": "16c7afec31b940ec1f23fbd6ef9de9e02843b4fe82e2ebeabd3c3572a95066d1",
+  "normalization_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+  "source_data_sha256": "ec229364a770aba0b6d75e9ec4460247ed0d085cd209741526f8cdafad506424",
+  "parameter_tensor_elements": 74209,
+  "real_parameter_degrees_of_freedom": 139745,
+  "training_elapsed_seconds": 18.367835376000585,
+  "pilot": false,
+  "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction"
+}

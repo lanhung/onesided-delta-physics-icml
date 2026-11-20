@@ -1,0 +1,11 @@
+{
+  "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction",
+  "complete": true,
+  "runs": 84,
+  "individual_50_step_trajectories": 672,
+  "per_step_metric_rows": 33600,
+  "epoch75_matches_primary_exactly": true,
+  "elapsed_seconds_not_benchmark": 11.958856985000239,
+  "script_sha256": "c83b8d4e0b86539071108f8a7e4507829662c00610bab96ccc3ef70c4ddefb99",
+  "primary_results_modified": false
+}

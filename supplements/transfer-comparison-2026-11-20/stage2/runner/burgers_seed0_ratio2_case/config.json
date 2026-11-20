@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "evidence_type": "independently_reconstructed_neural",
+  "backend": "torch",
+  "device": "cpu",
+  "dtype": "float32",
+  "reference_dtype": "float64",
+  "training_seed": 0,
+  "ic_seeds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007
+  ],
+  "target_trajectory_tuning_allowed": false,
+  "h": 0.02,
+  "nu0": 0.01,
+  "nu": 0.02,
+  "lengths": [
+    1.0
+  ],
+  "spatial_shape": [
+    64
+  ],
+  "channels": 1,
+  "horizon_steps": 50,
+  "methods": [
+    "frozen",
+    "delta",
+    "explicit",
+    "lie_post",
+    "lie_pre",
+    "strang",
+    "implicit"
+  ],
+  "delta_one_sided": true,
+  "failure_max_abs": 10000.0,
+  "adapter": {
+    "path": "../burgers_reconstruction_adapter.py",
+    "settings": {
+      "training_script": "../../burgers_fno/run_burgers_fno.py",
+      "training_script_sha256": "3c917405577a61c56a2a486e38841d2cad95dad201b6f1e206d9e10a93385bb3",
+      "torch_cpu_threads": 2
+    }
+  },
+  "dataset": {
+    "path": "paired_target.npz",
+    "sha256": "566aedb5a2e42f670d60eeea665d3cb0a376e737e52cbdc86c27d78b885fb006"
+  },
+  "dataset_metadata": {
+    "path": "paired_target.json",
+    "sha256": "03675c494f0a596434a7022b59b7c202e2e22c276a88bad9efbe051f1fa066b9"
+  },
+  "artifacts": {
+    "checkpoint": {
+      "path": "../../burgers_fno/results/seed_0/best_source_validation.pt",
+      "sha256": "c23890389e1c26b8be7fc7896cc39570a27ad6879f5064389749f980b059263f"
+    },
+    "normalizer": {
+      "path": "../../burgers_fno/results/normalization.json",
+      "sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe"
+    }
+  }
+}

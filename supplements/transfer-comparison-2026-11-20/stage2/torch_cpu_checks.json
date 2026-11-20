@@ -1,0 +1,2433 @@
+{
+  "evidence_type": "analytical_implementation_control",
+  "manuscript_checkpoint_tested": false,
+  "status": "passed",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "torch": "2.7.1+cpu",
+  "device": "cpu",
+  "cuda_available": false,
+  "gpu_tests_executed": false,
+  "case_count": 168,
+  "max_relative_error_float32": 4.1207790112083034e-07,
+  "max_relative_error_float64": 4.840403551519968e-15,
+  "lower_viscosity_additive_relative_error": 2.6421994186757775e-16,
+  "guards": {
+    "implicit": "rejected_lower_viscosity",
+    "explicit": "rejected_lower_viscosity",
+    "lie_pre": "rejected_lower_viscosity",
+    "lie_post": "rejected_lower_viscosity",
+    "strang": "rejected_lower_viscosity",
+    "cuda_benchmark_with_cpu_input": "rejected"
+  },
+  "cases": [
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 8.218866547420745e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 8.218866786465097e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.0275037991006153e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.204297340306225e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.5362810545916196e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.2042973404710418e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 8.607815786585394e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 8.360312847421882e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.3920550289951238e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.3920550289951238e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 2.0079184814000088e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.2987635852781854e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 8.218843521531229e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 8.419108884244096e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 8.825384085463642e-08,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.3016029393944459e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.2566899902680153e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.2975643133777825e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.3168557828863255e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 2.4631389679887496e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 2.568850097825438e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 3.321143442567704e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 3.705492286136299e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 5.124900590696776e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 3.85573564779202e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 2.7600697287191165e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 2.8809527690252853e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 4.017193339130021e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 4.017193339130021e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 4.796609139472674e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 3.645844930637306e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 2.618106786899564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 3.056343173970387e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.145182083901911e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 3.8402820980020237e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 3.780783558722924e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 5.020899031163098e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        45
+      ],
+      "lengths": [
+        2.5
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 3.7755298436872564e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0134569269168038e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.0134499948359851e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.1680208809751835e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.7512999550353887e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.8271362402511746e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.7512999550353887e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0776026319841434e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.5554398657540468e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.290069006026969e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.290069006026969e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 2.152503696501948e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.7946310736994202e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0134914394476275e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.1305920439099609e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.1207790112083034e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.302852472219792e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.333375895235131e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 2.1546853288403392e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.237806064508385e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 4.605205370429023e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.569360008812618e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 4.736124636935746e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 5.057735195507293e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 5.373607094826828e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 5.026267753428584e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 4.912442335811351e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.7542743744594905e-15,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 5.05131723952586e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 5.05131723952586e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 5.447345998435543e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 4.885019935192702e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 4.563953487709533e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 4.742766491624264e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.840403551519968e-15,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 4.738703780300358e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 4.687631170359457e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 4.966263469778256e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        48,
+        32
+      ],
+      "lengths": [
+        2.5,
+        0.75
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 4.719342146577469e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0375819081229947e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.0375819917377393e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.332365307523782e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.7890780927224467e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 2.0959462815223148e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.7890780931398392e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0438024579289907e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.0820280110965442e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.576289631599263e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.576289631599263e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.8268072933484657e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.4617601298455223e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 1.0375787168139272e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 1.0351410224112332e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 1.6350384618656872e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 1.236423076059875e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 1.4051418979825572e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 1.8518323867613832e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float32",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 1.2529483252570627e-07,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 5.044845322857313e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 4.996569838625509e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 6.667235642205373e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 7.181465166861476e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 9.363021323272626e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 1.0000000001,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 7.012450715189204e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 6.158932594495261e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 9.533701687659949e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 7.5148980590224235e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 7.5148980590224235e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 9.809026558730826e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 2.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 7.317407029685225e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "frozen",
+      "relative_l2_vs_analytic_modes": 5.032987176006956e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "delta",
+      "relative_l2_vs_analytic_modes": 7.048266449225634e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "explicit",
+      "relative_l2_vs_analytic_modes": 2.0825781247740927e-15,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_pre",
+      "relative_l2_vs_analytic_modes": 8.262737788140563e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "lie_post",
+      "relative_l2_vs_analytic_modes": 7.77534972661108e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "strang",
+      "relative_l2_vs_analytic_modes": 9.265595755828957e-16,
+      "predictor_forward_calls": 1
+    },
+    {
+      "shape": [
+        31,
+        35
+      ],
+      "lengths": [
+        1.3,
+        2.7
+      ],
+      "dtype": "torch.float64",
+      "ratio": 4.0,
+      "method": "implicit",
+      "relative_l2_vs_analytic_modes": 7.385121043306647e-16,
+      "predictor_forward_calls": 1
+    }
+  ]
+}

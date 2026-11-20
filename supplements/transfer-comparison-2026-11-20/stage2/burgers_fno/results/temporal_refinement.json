@@ -1,0 +1,69 @@
+{
+  "target_cases": [
+    {
+      "ratio": 1.0,
+      "nu": 0.01,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 1.9832458014237037e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r1.npz",
+      "truth_sha256": "9949ad2b1cd69020a60e43fbfa60cf4a918e9aeefd1ef48ce47a3de3a5c1efc1"
+    },
+    {
+      "ratio": 1.25,
+      "nu": 0.0125,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 2.3229675431168156e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r1p25.npz",
+      "truth_sha256": "97c6bed9dda7d4f666638a3e2751e5db9ccb9f0fe45d2eb944aaa790c6c0267b"
+    },
+    {
+      "ratio": 1.5,
+      "nu": 0.015,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 2.7168207735538656e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r1p5.npz",
+      "truth_sha256": "96b9b894d95d1864e2a39bce388f6d78a1e950ae8eb306967fabdf9c8a5a3067"
+    },
+    {
+      "ratio": 1.75,
+      "nu": 0.0175,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 3.124752359243208e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r1p75.npz",
+      "truth_sha256": "2a61195a19ea66ed643b95abd7cb5d572e4cc47a1bbbda37d80731c6998ed72e"
+    },
+    {
+      "ratio": 2.0,
+      "nu": 0.02,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 3.5541005538050376e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r2.npz",
+      "truth_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40"
+    },
+    {
+      "ratio": 3.0,
+      "nu": 0.03,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 6.18840905030991e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r3.npz",
+      "truth_sha256": "9fdf0cea862a4366448c132e08b79c08c190eb41052d31ab7aa1f1e3895032d7"
+    },
+    {
+      "ratio": 4.0,
+      "nu": 0.04,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 1.0522827587914383e-10,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r4.npz",
+      "truth_sha256": "ef6d93eed4995e738caa77706b00df54330b4433e449c2a614d255fbbc770e5a"
+    }
+  ],
+  "source_dt0p0005_vs0p000125_max_rel": 3.411371091020165e-10,
+  "scope": "fixed64-point semidiscrete time convergence; no spatial convergence claim"
+}
