@@ -1,4 +1,4 @@
-"""Numerical check of Proposition 2 (local error of additive, Lie and Strang corrections).
+"""Numerical check of Proposition 2 (local error of additive, Lie, implicit and Strang corrections).
 
 Toy system du/dt = nu*L u + N(u) with L diagonal negative (a discrete Laplacian) and a nonlinear N;
 the frozen network is idealised as the exact nu0 flow. Requires numpy and scipy."""
@@ -29,7 +29,9 @@ def flow(nu_, u, h, steps=4000):
 u0 = rng.normal(size=n) * 0.5
 pred_add = 0.5 * (Nprime(u0) @ (B @ u0) + B @ N(u0))
 pred_lie = 0.5 * (Nprime(u0) @ (B @ u0) - B @ N(u0))
-print(" h        add: |err|/h^2  vs pred   Lie: |err|/h^2 vs pred   Strang: |err|/h^3")
+pred_pre = -pred_lie
+pred_imp = pred_lie - 0.5 * (B @ (B @ u0))
+print(" h      add/h^2 pred   Lie-post/h^2 pred   Lie-pre/h^2 pred   implicit/h^2 pred   Strang/h^3")
 for h in (0.04, 0.02, 0.01, 0.005):
     true = flow(nu, u0, h)
     phi0 = flow(nu0, u0, h)
@@ -37,10 +39,14 @@ for h in (0.04, 0.02, 0.01, 0.005):
     add = phi0 + (S(nu) - S(nu0)) @ u0
     lie = expm(h * B) @ phi0
     strang = expm(h / 2 * B) @ flow(nu0, expm(h / 2 * B) @ u0, h)
-    e_add, e_lie, e_str = true - add, true - lie, true - strang
-    print(f"{h:6.3f}   {np.linalg.norm(e_add)/h**2:9.5f}  {np.linalg.norm(pred_add):9.5f}"
-          f"   {np.linalg.norm(e_lie)/h**2:9.5f} {np.linalg.norm(pred_lie):9.5f}"
-          f"   {np.linalg.norm(e_str)/h**3:9.5f}")
-print("direction match (cosine) at h=0.005:",
-      float(e_add @ pred_add / np.linalg.norm(e_add) / np.linalg.norm(pred_add)),
-      float(e_lie @ pred_lie / np.linalg.norm(e_lie) / np.linalg.norm(pred_lie)))
+    pre = flow(nu0, expm(h * B) @ u0, h)
+    imp = np.linalg.solve(np.eye(n) - h * B, phi0)
+    e_add, e_lie, e_str, e_pre, e_imp = true - add, true - lie, true - strang, true - pre, true - imp
+    print(f"{h:6.3f}  {np.linalg.norm(e_add)/h**2:6.3f} {np.linalg.norm(pred_add):6.3f}"
+          f"   {np.linalg.norm(e_lie)/h**2:6.3f} {np.linalg.norm(pred_lie):6.3f}"
+          f"   {np.linalg.norm(e_pre)/h**2:6.3f} {np.linalg.norm(pred_pre):6.3f}"
+          f"   {np.linalg.norm(e_imp)/h**2:6.3f} {np.linalg.norm(pred_imp):6.3f}"
+          f"   {np.linalg.norm(e_str)/h**3:6.3f}")
+cos = lambda a, b: float(a @ b / np.linalg.norm(a) / np.linalg.norm(b))
+print("direction match (cosine) at h=0.005: add %.6f, Lie-post %.6f, Lie-pre %.6f, implicit %.6f"
+      % (cos(e_add, pred_add), cos(e_lie, pred_lie), cos(e_pre, pred_pre), cos(e_imp, pred_imp)))
