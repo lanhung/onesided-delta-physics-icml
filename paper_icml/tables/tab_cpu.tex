@@ -1,0 +1,22 @@
+\begin{table}[t]
+\caption{\textbf{CPU cost on a small grid.} Independent Burgers FNO, seed 0, 64 points, $\nu/\nu_0=2$, batch of 8,
+50 steps, one CPU thread. Median wall-clock time and IQR over ten timed runs; training, data loading and metrics
+excluded. Avg-50 is for this one model, so it differs from the three-seed means in \cref{tab:recon}.}
+\label{tab:cpu}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l c c c@{}}
+\toprule
+Method & \shortstack{NN calls\\/ step} & Time (ms) & Avg-50 RelL2 \\
+\midrule
+Frozen FNO & 1 & 66.3 (3.8) & 0.2805 \\
+Additive ($\Delta$-Physics) & 1 & 69.3 (3.8) & 0.0210 \\
+Lie, post & 1 & 70.1 (2.6) & 0.0161 \\
+Strang & 1 & 69.7 (2.1) & 0.0150 \\
+Implicit, post & 1 & 69.4 (5.3) & 0.0158 \\
+\midrule
+Spectral RK4, $\delta t=0.002$ & 0 & 42.5 (3.6) & $3.48\times10^{-7}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

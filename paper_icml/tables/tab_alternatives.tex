@@ -1,5 +1,5 @@
 \begin{table*}[t]
-\caption{\textbf{What do stronger alternatives cost?} 2D Navier--Stokes at $\nu/\nu_0=2$.
+\caption{\textbf{Original F-FNO: costlier alternatives.} 2D Navier--Stokes at $\nu/\nu_0=2$.
 The first three rows reuse the same frozen checkpoint (24 training trajectories at $\nu_0$, 28,370 parameters);
 the conditioned model is trained on five viscosities including every test value (28,386 parameters) and also
 receives proportionally more optimizer updates, so it is an upper reference rather than an equal-budget competitor.
@@ -12,9 +12,9 @@ Inference: CPU wall-clock for 8 trajectories $\times$ 50 steps. Mean\,$\pm$\,s.d
 \toprule
 Method & \shortstack{Target-$\nu$\\data?} & \shortstack{Train\\traj.} & \shortstack{NN evals\\/ step} & \shortstack{Inference\\time (s)} & Avg-50 RelL2 & Step-50 RelL2 \\
 \midrule
-Frozen network (Increment) & No & 24 & 1.00 & 7.53\std{0.83} & 0.2275\std{0.0275} & 0.4721\std{0.0680} \\
-\quad + One-sided $\Delta$-Physics (ours) & No & 24 & 1.00 & 8.06\std{1.40} & 0.1791\std{0.0242} & 0.3682\std{0.0632} \\
-\quad + Recast-style fixed-point iteration & No & 24 & 8.81 & 70.08\std{8.50} & 0.1786\std{0.0242} & 0.3659\std{0.0630} \\
+Frozen F-FNO & No & 24 & 1.00 & 7.53\std{0.83} & 0.2275\std{0.0275} & 0.4721\std{0.0680} \\
+\quad + additive ($\Delta$-Physics) & No & 24 & 1.00 & 8.06\std{1.40} & 0.1791\std{0.0242} & 0.3682\std{0.0632} \\
+\quad + input-Recast (iterative) & No & 24 & 8.81 & 70.08\std{8.50} & 0.1786\std{0.0242} & 0.3659\std{0.0630} \\
 \midrule
 Conditioned F-FNO (trained on all 5 $\nu$) & Yes & 120 & 1.00 & 7.38\std{0.32} & 0.0272\std{0.0008} & 0.0494\std{0.0011} \\
 \bottomrule
