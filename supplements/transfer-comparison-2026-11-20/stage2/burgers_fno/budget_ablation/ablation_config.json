@@ -1,0 +1,42 @@
+{
+  "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction",
+  "experiment": "followup_fixed_epoch_checkpoint_ablation",
+  "epochs": [
+    15,
+    30,
+    50,
+    75
+  ],
+  "ratio": 2.0,
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "ic_seeds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007
+  ],
+  "methods": [
+    "frozen",
+    "delta",
+    "explicit",
+    "lie_pre",
+    "lie_post",
+    "strang",
+    "implicit"
+  ],
+  "checkpoint_policy": "actual fixed epoch snapshot; not best validation checkpoint within each budget",
+  "source_dataset_and_schedule": "same primary75epoch training run, snapshots of its trajectory",
+  "target_tuning": false,
+  "new_training": false,
+  "truth_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40",
+  "normalization_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+  "scope": "follow-up diagnostic on saved models; not a new independent training replicate or manuscript reproduction"
+}

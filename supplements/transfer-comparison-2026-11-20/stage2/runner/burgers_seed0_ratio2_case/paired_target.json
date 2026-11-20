@@ -1,0 +1,28 @@
+{
+  "h": 0.02,
+  "nu": 0.02,
+  "lengths": [
+    1.0
+  ],
+  "spatial_shape": [
+    64
+  ],
+  "channels": 1,
+  "units": "physical",
+  "includes_initial_state": true,
+  "dtype": "float64",
+  "generator": "independent float64 Fourier RK4 Burgers reference",
+  "reference_accuracy_status": "time refinement only on fixed grid; spatial convergence not established",
+  "temporal_refinement": {
+    "ratio": 2.0,
+    "nu": 0.02,
+    "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 3.5541005538050376e-11,
+    "coarse_dt": 0.00025,
+    "fine_dt": 0.000125,
+    "truth_file": "truth_r2.npz",
+    "truth_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40"
+  },
+  "projection_policy": "2/3-dealiased conservative nonlinearity, full Laplacian; no full-state projection",
+  "source_raw_file": "../../burgers_fno/results/truth_r2.npz",
+  "source_raw_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40"
+}

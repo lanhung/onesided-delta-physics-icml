@@ -1,0 +1,225 @@
+"""Matched CPU rollout benchmarks on the independently rebuilt Burgers FNO.
+
+The neural checkpoint is not the manuscript's checkpoint. This runs only after
+other compute jobs finish. NumPy/SciPy direct-solver arithmetic is float32;
+truth and final error accumulation are float64. No GPU results are produced.
+"""
+import argparse
+import csv
+import hashlib
+import json
+import os
+import platform
+import random
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+import scipy
+from scipy import fft
+import torch
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT / "burgers_fno"))
+sys.path.insert(0, str(ROOT / "shared"))
+from run_burgers_fno import FNO1d, physical_predictor, BurgersReference
+from spectral_transfer_torch import METHODS, TorchTransferStepper
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+class DirectBurgers32:
+    """Same dealiased semidiscrete PDE, RK4 in Fourier space, native float32.
+
+    Every requested physical output is materialized, even with final-only
+    storage, to match the neural rollout's 50 output boundaries. Working in
+    Fourier space removes redundant transforms within each RK4 stage.
+    """
+    def __init__(self, n, nu, h, max_dt):
+        self.n, self.nu, self.h = n, np.float32(nu), h
+        self.count = int(np.ceil(h / max_dt - 1e-12))
+        self.dt = np.float32(h / self.count)
+        k = (2*np.pi*np.fft.rfftfreq(n, d=1/n)).astype(np.float32)
+        self.q = k*k
+        derivative_k = k.copy()
+        derivative_k[-1] = 0
+        self.ik = (1j*derivative_k).astype(np.complex64)
+        self.mask = np.fft.rfftfreq(n)*n < n/3
+        if float(self.dt*self.nu*self.q.max()) > 2.5:
+            raise ValueError("Unstable direct solver setting")
+
+    def rhs(self, spectrum):
+        filtered = fft.irfft(spectrum*self.mask, n=self.n, workers=1)
+        nonlinear = -.5*self.ik*fft.rfft(filtered*filtered, workers=1)*self.mask
+        return nonlinear-self.nu*self.q*spectrum
+
+    def __call__(self, initial, steps=50, keep=False, check_each=False):
+        u = initial.copy()
+        spectrum = fft.rfft(u, workers=1)
+        assert spectrum.dtype == np.complex64
+        states = [] if keep else None
+        for _ in range(steps):
+            for _ in range(self.count):
+                a = self.rhs(spectrum)
+                b = self.rhs(spectrum + .5*self.dt*a)
+                c = self.rhs(spectrum + .5*self.dt*b)
+                d = self.rhs(spectrum + self.dt*c)
+                spectrum = spectrum + (self.dt/6)*(a + 2*b + 2*c + d)
+            u = fft.irfft(spectrum, n=self.n, workers=1)
+            if check_each and (not np.isfinite(u).all() or np.max(np.abs(u)) > 1e4):
+                raise RuntimeError("Failed direct solver rollout")
+            if keep:
+                states.append(u)
+        assert u.dtype == np.float32
+        return np.stack(states) if keep else u
+
+
+@torch.inference_mode()
+def neural_rollout(stepper, initial, steps=50, keep=False, check_each=False):
+    u = initial.clone()
+    states = [] if keep else None
+    for _ in range(steps):
+        u = stepper(u)
+        if check_each and (not bool(torch.isfinite(u).all()) or float(u.abs().max()) > 1e4):
+            raise RuntimeError("Failed neural rollout")
+        if keep:
+            states.append(u)
+    return torch.stack(states) if keep else u
+
+
+def mean_error(prediction, target):
+    p = np.asarray(prediction, dtype=np.float64).reshape(prediction.shape[0], -1)
+    t = np.asarray(target, dtype=np.float64).reshape(target.shape[0], -1)
+    return float(np.mean(np.linalg.norm(p-t, axis=1)/np.linalg.norm(t, axis=1)))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--results", type=Path, default=ROOT/"burgers_fno"/"results")
+    parser.add_argument("--out", type=Path, default=ROOT/"cpu_benchmark")
+    parser.add_argument("--warmup", type=int, default=3)
+    parser.add_argument("--repeats", type=int, default=10)
+    parser.add_argument("--torch-threads", type=int, choices=(1, 2, 4), default=4)
+    args = parser.parse_args()
+    if args.warmup < 1 or args.repeats < 10:
+        raise ValueError("Require warmup>=1, repeats>=10.")
+    if args.out.exists() and any(args.out.iterdir()):
+        raise ValueError("Choose a fresh benchmark output directory.")
+    if not (args.results/"execution_summary.json").is_file():
+        raise ValueError("Complete the neural accuracy study before benchmarking.")
+    torch.set_num_threads(args.torch_threads)
+    torch.set_num_interop_threads(1)
+    torch.use_deterministic_algorithms(True)
+    checkpoint = args.results/"seed_0"/"best_source_validation.pt"
+    model = FNO1d()
+    saved = torch.load(checkpoint, map_location="cpu", weights_only=True)
+    model.load_state_dict(saved["state_dict"])
+    model.eval()
+    for p in model.parameters():
+        p.requires_grad_(False)
+    stats = json.loads((args.results/"normalization.json").read_text())
+    predictor = physical_predictor(model, stats)
+    calls = [0]
+    handle = model.register_forward_hook(lambda *_: calls.__setitem__(0, calls[0]+1))
+    truth = np.load(args.results/"truth_r2.npz")["truth"]
+    rows, raw, excluded, validation = [], [], [], []
+    args.out.mkdir(parents=True)
+    (args.out/"benchmark_script_used.txt").write_bytes(Path(__file__).read_bytes())
+    for batch in (1, 8):
+        np_initial = truth[0, :batch].astype(np.float32)
+        tensor_initial = torch.from_numpy(np_initial.copy())
+        candidates = {}
+        for method in METHODS:
+            stepper = TorchTransferStepper(predictor, (1.,), .02, .01, .02, method)
+            candidates[method] = (lambda keep=False, check=False, s=stepper:
+                                  neural_rollout(s, tensor_initial, keep=keep, check_each=check))
+        for dt in (.002, .001, .0005):
+            solver = DirectBurgers32(64, .02, .02, dt)
+            candidates[f"rk4_dt{dt:g}"] = (lambda keep=False, check=False, s=solver:
+                                           s(np_initial, keep=keep, check_each=check))
+        accepted, final_errors, avg_errors = {}, {}, {}
+        for name, run in candidates.items():
+            try:
+                states = run(keep=True, check=True)
+                states = states.numpy() if isinstance(states, torch.Tensor) else states
+                final_errors[name] = mean_error(states[-1], truth[-1, :batch])
+                avg_errors[name] = float(np.mean([mean_error(states[t], truth[t+1, :batch])
+                                                 for t in range(50)]))
+            except RuntimeError as exc:
+                excluded.append({"batch_size": batch, "method": name,
+                                 "reason": str(exc), "timing_reported": False})
+                continue
+            accepted[name] = run
+            if name.startswith("rk4_"):
+                dt = float(name.split("dt")[1])
+                reference = BurgersReference().advance(np_initial.astype(np.float64), .02, .02, dt)
+                check = DirectBurgers32(64, .02, .02, dt)(np_initial, steps=1)
+                delta = mean_error(check, reference)
+                assert delta < 3e-6, (name, delta)
+                validation.append({"batch_size": batch, "method": name,
+                                   "float32_fourier_rk4_vs_original_float64_physical_rk4_one_step": delta})
+        for run in accepted.values():
+            for _ in range(args.warmup):
+                run()
+        rng = random.Random(20261120 + batch)
+        times = {name: [] for name in accepted}
+        forward_counts = {name: [] for name in accepted}
+        for repetition in range(args.repeats):
+            order = list(accepted)
+            rng.shuffle(order)
+            for order_idx, name in enumerate(order):
+                before = calls[0]
+                t0 = time.perf_counter()
+                final = accepted[name]()
+                elapsed = time.perf_counter()-t0
+                actual = calls[0]-before
+                finite = bool(torch.isfinite(final).all()) if isinstance(final, torch.Tensor) else bool(np.isfinite(final).all())
+                assert finite
+                expected_calls = 0 if name.startswith("rk4_") else 50
+                assert actual == expected_calls
+                times[name].append(elapsed)
+                forward_counts[name].append(actual)
+                raw.append({"batch_size": batch, "repetition": repetition, "order_index": order_idx,
+                            "method": name, "seconds": elapsed, "actual_network_forwards": actual})
+        for name, values in times.items():
+            q1, q3 = np.percentile(values, [25, 75])
+            rows.append({"batch_size": batch, "method": name, "network_training_seed": None if name.startswith("rk4_") else 0,
+                         "median_seconds_per_50step_rollout": float(np.median(values)),
+                         "q1_seconds": float(q1), "q3_seconds": float(q3),
+                         "iqr_seconds": float(q3-q1),
+                         "mean_actual_network_forwards_per_rollout": float(np.mean(forward_counts[name])),
+                         "avg50_rel_l2": avg_errors[name], "step50_rel_l2": final_errors[name],
+                         "dtype": "float32", "device": "cpu", "output_storage": "final_only_with_50_output_evaluations"})
+        print(json.dumps({"batch_completed": batch, "rows": rows[-len(accepted):]}), flush=True)
+    handle.remove()
+    processor = "unknown"
+    if Path("/proc/cpuinfo").exists():
+        processor = next((line.split(":",1)[1].strip() for line in Path("/proc/cpuinfo").read_text().splitlines()
+                          if line.startswith("model name")), "unknown")
+    report = {"evidence_type": "cpu_benchmark_independently_reconstructed_neural",
+              "original_manuscript_model": False, "gpu_executed": False,
+              "training_seed_timed": 0, "nu0": .01, "nu": .02, "grid": 64, "h": .02,
+              "horizon_steps": 50, "warmup_full_rollouts": args.warmup,
+              "repeated_full_rollouts": args.repeats, "randomized_method_order_per_repeat": True,
+              "torch_threads": torch.get_num_threads(), "scipy_fft_workers": 1,
+              "processor": processor, "logical_cpu_count": os.cpu_count(),
+              "versions": {"torch": str(torch.__version__), "numpy": np.__version__,
+                           "scipy": scipy.__version__, "python": platform.python_version()},
+              "checkpoint_sha256": sha(checkpoint), "normalizer_sha256": sha(args.results/"normalization.json"),
+              "target_sha256": sha(args.results/"truth_r2.npz"), "script_sha256": sha(__file__),
+              "included": "initial copy; physical wrapper and normalization; all50 physical output computations; final state retention",
+              "excluded": "checkpoint/data loading; training; truth generation; metric computation; per-step failure checks; saved rollout stacking",
+              "comparison_limit": f"Same CPU, float32 and physical outputs; different implementations, Torch {torch.get_num_threads()} threads and SciPy FFT 1 worker. This is implementation-level latency, not an algorithmic complexity bound or a GPU claim.",
+              "accuracy_prescreen": "all50 outputs checked separately; failed methods excluded from timing and retained in excluded_methods",
+              "direct_solver_validation": validation, "excluded_methods": excluded, "summary": rows}
+    (args.out/"benchmark.json").write_text(json.dumps(report, indent=2, allow_nan=False)+"\n")
+    for name, data in [("summary.csv", rows), ("raw_timings.csv", raw)]:
+        with (args.out/name).open("w", newline="") as f:
+            w=csv.DictWriter(f, fieldnames=list(data[0])); w.writeheader(); w.writerows(data)
+
+
+if __name__ == "__main__":
+    main()

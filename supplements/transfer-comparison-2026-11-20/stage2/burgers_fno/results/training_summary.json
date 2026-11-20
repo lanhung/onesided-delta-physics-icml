@@ -1,0 +1,47 @@
+[
+  {
+    "training_seed": 0,
+    "completed_epochs": 75,
+    "selected_epoch": 75,
+    "selected_source_validation_rel_l2": 0.0026216334285624433,
+    "checkpoint_path": "seed_0/best_source_validation.pt",
+    "checkpoint_sha256": "c23890389e1c26b8be7fc7896cc39570a27ad6879f5064389749f980b059263f",
+    "normalization_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+    "source_data_sha256": "ec229364a770aba0b6d75e9ec4460247ed0d085cd209741526f8cdafad506424",
+    "parameter_tensor_elements": 74209,
+    "real_parameter_degrees_of_freedom": 139745,
+    "training_elapsed_seconds": 17.960761166999873,
+    "pilot": false,
+    "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction"
+  },
+  {
+    "training_seed": 1,
+    "completed_epochs": 75,
+    "selected_epoch": 75,
+    "selected_source_validation_rel_l2": 0.0025344800277530047,
+    "checkpoint_path": "seed_1/best_source_validation.pt",
+    "checkpoint_sha256": "16c7afec31b940ec1f23fbd6ef9de9e02843b4fe82e2ebeabd3c3572a95066d1",
+    "normalization_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+    "source_data_sha256": "ec229364a770aba0b6d75e9ec4460247ed0d085cd209741526f8cdafad506424",
+    "parameter_tensor_elements": 74209,
+    "real_parameter_degrees_of_freedom": 139745,
+    "training_elapsed_seconds": 18.367835376000585,
+    "pilot": false,
+    "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction"
+  },
+  {
+    "training_seed": 2,
+    "completed_epochs": 75,
+    "selected_epoch": 75,
+    "selected_source_validation_rel_l2": 0.0022140791420376883,
+    "checkpoint_path": "seed_2/best_source_validation.pt",
+    "checkpoint_sha256": "4f1d15b06830513a6aaa2f71ac594f987b51bb45573f50c50e68911f39533621",
+    "normalization_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+    "source_data_sha256": "ec229364a770aba0b6d75e9ec4460247ed0d085cd209741526f8cdafad506424",
+    "parameter_tensor_elements": 74209,
+    "real_parameter_degrees_of_freedom": 139745,
+    "training_elapsed_seconds": 19.10684523999953,
+    "pilot": false,
+    "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction"
+  }
+]

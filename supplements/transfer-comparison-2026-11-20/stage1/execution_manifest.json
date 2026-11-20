@@ -1,0 +1,41 @@
+{
+  "manuscript_input": {
+    "name": "onesided-delta-physics-icml-v2.pdf",
+    "sha256": "ca6f5da8564eb7287d14808be5633a09ff5495996a98e118696471219ecdc473",
+    "pages": 14
+  },
+  "original_neural_experiments_executed": false,
+  "missing_original_assets": [
+    "source repository",
+    "trained checkpoints",
+    "normalizers",
+    "original test trajectories or exact generating configuration"
+  ],
+  "numpy_controls_executed": true,
+  "nonconvergence_diagnostics_executed": true,
+  "burgers_reference": "numerical RK4 reference, not a neural checkpoint",
+  "burgers_seeds_meaning": "initial conditions only, not training replicates",
+  "torch_validation": "syntax compilation and static review only; torch unavailable",
+  "gpu_execution": false,
+  "timing_results_for_original_models": null,
+  "files_sha256": {
+    "INTEGRATION_EN.txt": "32ba11a6979fff4eafa67fccb8aef6b70d1ed86d2bb26e13b97d9ed23ed9c091",
+    "README.txt": "1410845c483a083ff6b37aef23c64e1959adc833bc22ead1fe34b713c9b1d186",
+    "check_failure_paths.py": "d2153b1ff3e381692f89a7ea9d7cfd4e7d9cd4f086ca8905b690edad7ac0a5a5",
+    "experiment_matrix.json": "1f67f0b91c16eae86100acdbc2563bda58b19e6bb45291376938ba0198d0ac87",
+    "experiment_protocol_zh.txt": "ab3421348836c4d60d92e6e83ba6e5f706e0449ff17fe28d902be8511fabfd92",
+    "requirements-controls.txt": "815360a00e0e1d7a128cade3de11b66d3fe997cbd6e2c69f8081eb9bc8b88197",
+    "results/burgers_control_curve.csv": "b85ce3e0bd5dbc54d0084190d3c79f8ebcd10df78da04df3e25cefee20d5ae22",
+    "results/burgers_control_rollout.pdf": "087b6d353496697644ac4d7727fef43dbabb861b158171cc3a8cdeb7619ace49",
+    "results/burgers_control_rollout.png": "20a18ccb60b1dd172a9b8f9f3ab408fc8d84f6d23e400533fcd3e9295a32f8aa",
+    "results/burgers_control_states.npz": "d214538fb7b8bd31ec264b332fa42d2d878884e7f97153455f84059a63e73480",
+    "results/burgers_control_summary.csv": "ce96bce1bd94ab40b195ddae0fab6d1bdf6fa15c044d63fb6ae3f93926f19ff0",
+    "results/control_results.json": "e507ed0153069597bb321f7ba52629cbeafd513af841c065845c8a1b5a2303a9",
+    "results/local_order.csv": "14c156974c358946f5996dd9bcd88b5e1050152097af9908344abda2d4185862",
+    "results/local_order.pdf": "080e5cb05570a44c4b9c835b48220b3c619c133d851d620c6c115b907d544b50",
+    "results/local_order.png": "8d8ba1f747a5a03c697bbb619702e8d32456678cac146e3c9c3eee9e931b8cc0",
+    "run_controls.py": "2b9895ac3805cc103ae60d0477817fa4784b09b200844b183f6c387d3798f195",
+    "spectral_transfer_numpy.py": "d434cb0dba75c9ca469c989e30f45c9c54f7ec2146377a3407156975dcbc5727",
+    "spectral_transfer_torch.py": "7f4a0b33a4154e0f0e4bb40b5a66daecb9aaf88ecf2bad176a2c82a0f2dbc1f1"
+  }
+}

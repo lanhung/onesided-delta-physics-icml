@@ -1,0 +1,62 @@
+{
+  "status": "planned_not_executed",
+  "decision_basis": "Executed independent Burgers FNO and NS numerical-reference controls favor strong classical-composition baselines on Avg50; endpoint rankings can differ.",
+  "priority_order": [
+    {
+      "name": "original_navier_stokes_frozen_checkpoint_comparison",
+      "required_assets": ["model and physical-wrapper source", "75epoch checkpoint(s)", "source normalizers", "original test trajectories", "original vector Aitken solver"],
+      "training_seeds": [0, 1, 2],
+      "grid": [64, 64],
+      "nu0": 0.001,
+      "h": 0.05,
+      "ratios": [1.0, 1.25, 1.5, 1.75, 2.0, 3.0, 4.0],
+      "methods": ["frozen", "delta", "explicit", "lie_pre", "lie_post", "strang", "implicit", "original_input_recast_aitken_if_available"],
+      "horizons": [50, 100, 200],
+      "selection": "source validation only; no target tuning"
+    },
+    {
+      "name": "native_128_neural",
+      "train_grid": [128, 128],
+      "evaluation_grid": [128, 128],
+      "new_source_model_required": true,
+      "training_seeds": [0, 1, 2],
+      "main_diagnostic": "accuracy and failures under larger active physical bandwidth; separate smooth-IC consistency from resolution-demanding cases",
+      "ground_truth": "independent temporal refinement plus256-grid anchor on selected trajectories"
+    },
+    {
+      "name": "joint_64_to_128_resolution_and_viscosity",
+      "train_grid": [64, 64],
+      "evaluation_grid": [128, 128],
+      "retraining": false,
+      "source_statistics_refit": false,
+      "report_source_viscosity_resolution_error_first": true,
+      "reported_separately_from_native128": true
+    },
+    {
+      "name": "hyperviscous_navier_stokes",
+      "linear_operator": "-(-Laplacian)^2",
+      "fourier_symbol": "-|k|^4",
+      "parameter_units": "length^4/time",
+      "ratios": [1.0, 1.25, 1.5, 2.0],
+      "reference_model": "train independently on this PDE at kappa0, then freeze",
+      "truth": "validated exponential or implicit time integration, or a demonstrably stable refined RK4",
+      "existing_laplacian_wrapper_supports_this_directly": false
+    },
+    {
+      "name": "reaction_diffusion",
+      "example": "two-component Gray-Scott with fixed reaction parameters",
+      "shift": "first common diffusivity ratio; then vary one species only",
+      "diagnostics": ["per-species error", "pattern length scale", "phase-sensitive field error", "negative-concentration fraction"],
+      "reference_model": "new source model, fixed source-only normalization",
+      "current_wrapper_supports_species_specific_diffusivity": false,
+      "projection": "no hidden positivity clipping; if introduced, same declared policy for every method"
+    },
+    {
+      "name": "dispersive_and_mixed_spectrum_extension",
+      "examples": ["KdV", "Kuramoto-Sivashinsky"],
+      "priority": "after original-model and dissipative-operator comparisons",
+      "requirements": ["operator-specific theory", "phase-sensitive errors forKdV", "short-time prediction and long-time statistics forKS", "no automatic reuse of dissipativity or one-sided proof"]
+    }
+  ],
+  "method_selection_rule": "Report paired seed-level errors, failure rates and measured latency; retain a conditional or multiobjective conclusion when endpoints and trajectory averages disagree. Do not select a winner using one favorable metric alone."
+}

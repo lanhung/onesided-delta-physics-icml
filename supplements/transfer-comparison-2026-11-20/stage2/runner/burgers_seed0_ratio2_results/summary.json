@@ -1,0 +1,423 @@
+{
+  "status": "completed",
+  "evidence_type": "independently_reconstructed_neural",
+  "completed_at_utc": "2026-11-20T00:20:19.045744+00:00",
+  "original_neural_experiment": false,
+  "independently_reconstructed_neural_experiment": true,
+  "timing_benchmark_performed": false,
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "backend": "torch",
+    "device": "cpu",
+    "torch": "2.7.1+cpu",
+    "torch_cpu_threads": 2,
+    "cuda_available": false
+  },
+  "config": {
+    "schema_version": 1,
+    "evidence_type": "independently_reconstructed_neural",
+    "backend": "torch",
+    "device": "cpu",
+    "dtype": "float32",
+    "reference_dtype": "float64",
+    "training_seed": 0,
+    "ic_seeds": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007
+    ],
+    "target_trajectory_tuning_allowed": false,
+    "h": 0.02,
+    "nu0": 0.01,
+    "nu": 0.02,
+    "lengths": [
+      1.0
+    ],
+    "spatial_shape": [
+      64
+    ],
+    "channels": 1,
+    "horizon_steps": 50,
+    "methods": [
+      "frozen",
+      "delta",
+      "explicit",
+      "lie_post",
+      "lie_pre",
+      "strang",
+      "implicit"
+    ],
+    "delta_one_sided": true,
+    "failure_max_abs": 10000.0,
+    "adapter": {
+      "path": "../burgers_reconstruction_adapter.py",
+      "settings": {
+        "training_script": "../../burgers_fno/run_burgers_fno.py",
+        "training_script_sha256": "3c917405577a61c56a2a486e38841d2cad95dad201b6f1e206d9e10a93385bb3",
+        "torch_cpu_threads": 2
+      }
+    },
+    "dataset": {
+      "path": "paired_target.npz",
+      "sha256": "566aedb5a2e42f670d60eeea665d3cb0a376e737e52cbdc86c27d78b885fb006"
+    },
+    "dataset_metadata": {
+      "path": "paired_target.json",
+      "sha256": "03675c494f0a596434a7022b59b7c202e2e22c276a88bad9efbe051f1fa066b9"
+    },
+    "artifacts": {
+      "checkpoint": {
+        "path": "../../burgers_fno/results/seed_0/best_source_validation.pt",
+        "sha256": "c23890389e1c26b8be7fc7896cc39570a27ad6879f5064389749f980b059263f"
+      },
+      "normalizer": {
+        "path": "../../burgers_fno/results/normalization.json",
+        "sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe"
+      }
+    }
+  },
+  "provenance": {
+    "config": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/burgers_seed0_ratio2_case/config.json",
+      "sha256": "5e9106677060fb787765947bd3a8ccea8deb65645d2d6e0039d791089e833ef8"
+    },
+    "runner": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/evaluate.py",
+      "sha256": "c32d93a3deed4bc8d42cf18bb48b564d56449ffe05a84827d583b5a23bf618a7"
+    },
+    "transfer_wrapper": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/shared/spectral_transfer_torch.py",
+      "sha256": "f0894ad26698bdf71823fa95ff3d9f09395d4a1e05f6243af84ed8717dd74ad8"
+    },
+    "checkpoint": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/burgers_fno/results/seed_0/best_source_validation.pt",
+      "sha256": "c23890389e1c26b8be7fc7896cc39570a27ad6879f5064389749f980b059263f",
+      "size_bytes": 568597
+    },
+    "normalizer": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/burgers_fno/results/normalization.json",
+      "sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+      "size_bytes": 232
+    },
+    "dataset": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/burgers_seed0_ratio2_case/paired_target.npz",
+      "sha256": "566aedb5a2e42f670d60eeea665d3cb0a376e737e52cbdc86c27d78b885fb006",
+      "size_bytes": 200648
+    },
+    "dataset_metadata": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/burgers_seed0_ratio2_case/paired_target.json",
+      "sha256": "03675c494f0a596434a7022b59b7c202e2e22c276a88bad9efbe051f1fa066b9",
+      "size_bytes": 946
+    },
+    "adapter": {
+      "path": "/workspace/scratch/137503518ac7/deliverables/delta_physics_stage2/runner/burgers_reconstruction_adapter.py",
+      "sha256": "a55e62a271dea2b2f07dafbf0d744a8f8f5db8a4a92816304f735b9d71ebe98c"
+    }
+  },
+  "dataset_metadata": {
+    "h": 0.02,
+    "nu": 0.02,
+    "lengths": [
+      1.0
+    ],
+    "spatial_shape": [
+      64
+    ],
+    "channels": 1,
+    "units": "physical",
+    "includes_initial_state": true,
+    "dtype": "float64",
+    "generator": "independent float64 Fourier RK4 Burgers reference",
+    "reference_accuracy_status": "time refinement only on fixed grid; spatial convergence not established",
+    "temporal_refinement": {
+      "ratio": 2.0,
+      "nu": 0.02,
+      "max_rel_l2_coarse_vs_fine_over_all_50_steps_and_8_ics": 3.5541005538050376e-11,
+      "coarse_dt": 0.00025,
+      "fine_dt": 0.000125,
+      "truth_file": "truth_r2.npz",
+      "truth_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40"
+    },
+    "projection_policy": "2/3-dealiased conservative nonlinearity, full Laplacian; no full-state projection",
+    "source_raw_file": "../../burgers_fno/results/truth_r2.npz",
+    "source_raw_sha256": "16e859d9e358e9a288a6674fa63d2f3678a1cbdf7ed6410cf77eeea2bac6de40"
+  },
+  "predictor_metadata": {
+    "evidence_type": "independently_reconstructed_neural",
+    "original_manuscript_checkpoint": false,
+    "h": 0.02,
+    "nu0": 0.01,
+    "lengths": [
+      1.0
+    ],
+    "evaluation_spatial_shape": [
+      64
+    ],
+    "training_resolution": [
+      64
+    ],
+    "channels": 1,
+    "dtype": "float32",
+    "backend": "torch",
+    "units": "physical",
+    "output_kind": "full_next_state",
+    "stateless": true,
+    "sample_independent": true,
+    "projection_policy": "none; fixed source normalization and coordinates inside physical predictor",
+    "checkpoint_sha256": "c23890389e1c26b8be7fc7896cc39570a27ad6879f5064389749f980b059263f",
+    "normalizer_sha256": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+    "training_seed": 0,
+    "selected_epoch": 75,
+    "source_validation_rel_l2": 0.0026216334285624433,
+    "eval_mode": true,
+    "architecture": {
+      "name": "independent_standard_FNO1d",
+      "width": 32,
+      "modes": 16,
+      "fourier_layers": 4,
+      "head_width": 128,
+      "activation": "GELU after first3 spectral+pointwise layers and head",
+      "inputs": "normalized state plus periodic-domain coordinate x",
+      "output": "normalized physical increment"
+    },
+    "training_script_sha256": "3c917405577a61c56a2a486e38841d2cad95dad201b6f1e206d9e10a93385bb3",
+    "forward_count_method": "torch model register_forward_hook"
+  },
+  "metric_definitions": {
+    "metric_accumulation_dtype": "float64; the reference trajectory retains reference_dtype, only initial inference state is cast to dtype",
+    "absolute_l2": "sqrt(product(lengths)/spatial_grid_count * sum_over_channels_and_grid(error**2))",
+    "relative_l2": "absolute_l2 / reference_l2; zero denominator is always null with explicit status, including 0/0; absolute_l2 remains available",
+    "psre": "||abs(fftn(pred,norm=forward))**2-abs(fftn(truth,norm=forward))**2||_2 / ||abs(fftn(truth,norm=forward))**2||_2; channels and all full-FFT modes pooled",
+    "avg": "uniform mean over requested time steps 1..T and paired initial conditions; initial state excluded"
+  },
+  "limitations": [
+    "Metadata declarations and hashes identify artifacts; they do not prove model provenance or absence of target-data tuning.",
+    "Accuracy runner includes CPU metric collection for Torch and must not be used as a GPU latency benchmark.",
+    "Original input-Recast/Aitken is intentionally unavailable until its exact implementation is supplied."
+  ],
+  "summaries": [
+    {
+      "method": "frozen",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.2804894575858787,
+      "final_relative_l2": 0.41749092365406404,
+      "avg_absolute_l2": 0.06325253291418916,
+      "final_absolute_l2": 0.05826030153246144,
+      "avg_psre": 0.35509488599301603,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "delta",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.02100834275172103,
+      "final_relative_l2": 0.026944298011536697,
+      "avg_absolute_l2": 0.0053215302408820804,
+      "final_absolute_l2": 0.0036700527695836165,
+      "avg_psre": 0.01606684709690254,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "explicit",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 8,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": 13,
+        "burgers_test_ic_3001": 12,
+        "burgers_test_ic_3002": 11,
+        "burgers_test_ic_3003": 13,
+        "burgers_test_ic_3004": 13,
+        "burgers_test_ic_3005": 14,
+        "burgers_test_ic_3006": 13,
+        "burgers_test_ic_3007": 14
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 95,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": null,
+      "final_relative_l2": null,
+      "avg_absolute_l2": null,
+      "final_absolute_l2": null,
+      "avg_psre": null,
+      "undefined_relative_l2_rows": 305,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "lie_post",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.016136901081866762,
+      "final_relative_l2": 0.02666060078348531,
+      "avg_absolute_l2": 0.0035776223155630895,
+      "final_absolute_l2": 0.0035993519713826963,
+      "avg_psre": 0.008827592210652737,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "lie_pre",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.017605658618021384,
+      "final_relative_l2": 0.02929357631929777,
+      "avg_absolute_l2": 0.003936356833367456,
+      "final_absolute_l2": 0.0039242080629642954,
+      "avg_psre": 0.010923772172601093,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "strang",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.014982783444628951,
+      "final_relative_l2": 0.02729399226095592,
+      "avg_absolute_l2": 0.003240468233960877,
+      "final_absolute_l2": 0.003667467554981942,
+      "avg_psre": 0.008463941619238573,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    },
+    {
+      "method": "implicit",
+      "evidence_type": "independently_reconstructed_neural",
+      "training_seed": 0,
+      "trajectory_count": 8,
+      "steps": 50,
+      "failed_trajectories": 0,
+      "first_failure_step_by_trajectory": {
+        "burgers_test_ic_3000": null,
+        "burgers_test_ic_3001": null,
+        "burgers_test_ic_3002": null,
+        "burgers_test_ic_3003": null,
+        "burgers_test_ic_3004": null,
+        "burgers_test_ic_3005": null,
+        "burgers_test_ic_3006": null,
+        "burgers_test_ic_3007": null
+      },
+      "callback_calls": 50,
+      "actual_network_forward_calls": 50,
+      "requested_sample_steps": 400,
+      "arithmetic_sample_slots_including_failed_placeholders": 400,
+      "successful_sample_steps": 400,
+      "mean_callback_calls_per_batch_step": 1.0,
+      "avg_relative_l2": 0.015804234990470158,
+      "final_relative_l2": 0.026691303117119897,
+      "avg_absolute_l2": 0.00346621584730801,
+      "final_absolute_l2": 0.0035900520913844675,
+      "avg_psre": 0.00956455431263183,
+      "undefined_relative_l2_rows": 0,
+      "aggregation": "all initial conditions and all requested steps; null if any constituent is missing/undefined; no survivor-only mean"
+    }
+  ]
+}

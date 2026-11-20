@@ -1,0 +1,7 @@
+{
+  "state_mean": 8.615793264018142e-18,
+  "state_std": 0.3970882850749259,
+  "increment_mean": 1.1670984635901252e-18,
+  "increment_std": 0.028129645049527655,
+  "provenance": "training pairs only; no validation/test statistics"
+}

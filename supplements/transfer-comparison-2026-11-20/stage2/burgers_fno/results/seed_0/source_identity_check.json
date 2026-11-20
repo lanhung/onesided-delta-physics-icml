@@ -1,0 +1,30 @@
+[
+  {
+    "method": "frozen",
+    "equal_at_source": true
+  },
+  {
+    "method": "delta",
+    "equal_at_source": true
+  },
+  {
+    "method": "explicit",
+    "equal_at_source": true
+  },
+  {
+    "method": "lie_pre",
+    "equal_at_source": true
+  },
+  {
+    "method": "lie_post",
+    "equal_at_source": true
+  },
+  {
+    "method": "strang",
+    "equal_at_source": true
+  },
+  {
+    "method": "implicit",
+    "equal_at_source": true
+  }
+]

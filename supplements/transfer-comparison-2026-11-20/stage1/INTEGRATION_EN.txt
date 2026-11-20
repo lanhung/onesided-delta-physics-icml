@@ -1,0 +1,204 @@
+PYTORCH INTEGRATION GUIDE — RUNTIME UNTESTED
+==========================================
+
+Validation status
+-----------------
+PyTorch is not installed in the supplied environment. The accompanying
+spectral_transfer_torch.py has received Python syntax compilation only. It has
+NOT been imported/executed with PyTorch, compared numerically against a real
+checkpoint, run on a GPU, or used to obtain timing numbers. The NumPy controls
+elsewhere in this folder do not validate this PyTorch implementation or establish
+GPU performance. Treat this as integration code requiring runtime verification.
+No paper checkpoint, training data, official repository, or vector-Aitken code is
+included. No neural experiment in the manuscript has been reproduced here.
+
+Scope and interface
+-------------------
+The module implements a periodic, constant-coefficient, isotropic Laplacian with
+one scalar viscosity shared by all physical channels. It supports d spatial axes
+and rectangular physical domains. Inputs are real float32/float64 tensors with
+shape [batch, channels, *spatial]. Only the final d axes are transformed; neither
+batch nor channels nor coordinate inputs are Fourier-filtered.
+
+Supply physical_predict(u), a callable that:
+  1. Accepts and returns physical states of identical shape, dtype and device.
+  2. Returns the FULL next state, not a normalized increment.
+  3. Calls the original frozen network exactly once.
+  4. Does not modify its input in place.
+
+For a CUDA benchmark, the callable must itself execute on CUDA without hidden
+CPU/NumPy round trips. Checking its returned device cannot detect such internal
+transfers; verify the original repository's predictor before making GPU claims.
+
+The original repository must supply coordinate construction, tensor-layout
+conversion, fixed training normalization and output denormalization. The transfer
+module does not guess them. Put the model in eval() mode and keep its weights
+frozen. All transfer/rollout entry points use torch.inference_mode(). An eval()
+model can still use nondeterministic kernels; establish determinism separately
+when testing bitwise agreement across separate forward calls.
+
+For a model predicting normalized increments, the physical wrapper is:
+
+  Phi(u) = u + increment_mean
+               + increment_std * model((u - state_mean) / state_std, coordinates)
+
+The model's actual coordinate/layout API may differ. Preserve its source-training
+statistics and broadcasting convention exactly, including the increment mean.
+Do not recompute statistics from target-viscosity or target-resolution test data.
+If the original predictor already returns a full physical next state, use that
+interface directly; do not add u again. Construct coordinates on the same device.
+If training statistics are spatially indexed, resolve their cross-resolution
+meaning before attempting 64-to-128 inference.
+
+Basic use
+---------
+These snippets assume the original repository has already loaded the checkpoint,
+normalizers, physical initial condition and physical_predict callable.
+
+  import torch
+  from spectral_transfer_torch import TorchTransferStepper, rollout
+
+  model.eval()  # model and every normalization/coordinate tensor are on u0.device
+  stepper = TorchTransferStepper(
+      physical_predict=physical_predict,
+      lengths=(1.0, 1.0), h=0.05, nu0=1.0e-3, nu=2.0e-3,
+      method="delta",
+  )
+  trajectory = rollout(stepper, u0, steps=50, keep_trajectory=True)
+  # trajectory shape: [50, B, C, Nx, Ny]; initial state is not included.
+  assert stepper.calls == 50
+
+The wrapper's calls counter counts physical_predict INVOCATIONS, not individual
+samples inside a batch. With B=8 and T=50, there are 50 batched network forwards,
+advancing 400 trajectory-steps. These are different quantities. The callable
+contract is necessary for callback calls to equal frozen-network calls.
+The counter is cumulative, including later warmups; benchmark results use counter
+differences for each timed rollout. Construct a NEW wrapper for each viscosity or
+method. Do not mutate configuration fields after construction: symbols are cached
+by spatial shape, device and dtype and assume fixed physical parameters.
+
+Method definitions
+------------------
+Write delta_nu = nu - nu0, h = network physical time step, q = |k|^2,
+E = exp(-h * delta_nu * q), and Phi = physical_predict.
+
+  frozen:   Phi(u)
+  delta:    Phi(u) + F^-1[(exp(-h*nu*q) - exp(-h*nu0*q)) * F[u]]
+  explicit: Phi(u) + h*delta_nu*Delta(u)
+  lie_pre:  Phi(E(u))
+  lie_post: E(Phi(u))
+  strang:   E_half(Phi(E_half(u)))
+  implicit: F^-1[F[Phi(u)] / (1 + h*delta_nu*q)]
+
+Every method invokes Phi exactly once per physical step. The naive Strang
+implementation uses two FFT/IFFT pairs; the other nontrivial corrections use one.
+At EXACTLY nu == nu0, every method returns Phi(u) directly, without filtering or
+adding a numerical zero. This is strict wrapper-level recovery, independent of
+whether repeated model forwards themselves are deterministic.
+
+Periodic coordinates are x_j = j*L/N, j=0,...,N-1; do not repeat the endpoint.
+Each axis uses k = 2*pi*torch.fft.fftfreq(N, d=L/N). Integer mode numbers alone
+would miss physical lengths and factors of 2*pi. All transforms, wave numbers,
+symbols and state arithmetic stay on the input device with the input precision.
+The implementation uses full complex FFTs of real states; an rFFT optimization
+is possible later but has not been implemented or benchmarked here.
+
+The difference of propagators uses expm1 to reduce cancellation for small shifts.
+For nu < nu0 it uses the algebraically equivalent expression
+  -exp(-h*nu*q) * expm1(h*(nu-nu0)*q),
+so that the bounded two-sided correction avoids a 0*inf intermediate on fine
+grids. The default delta_one_sided=True returns Phi(u) unchanged below nu0.
+To study the bounded two-sided ADDITIVE correction, set delta_one_sided=False.
+Below nu0 the explicit, splitting and implicit variants are intentionally rejected
+rather than silently applying inverse heat, a singular denominator, or a hidden
+spectral clipping policy. Nonnegative nu and nu0 are required.
+
+CUDA timing protocol
+--------------------
+benchmark_cuda_rollout requires a CUDA tensor and rejects CPU input. It executes
+real PyTorch CUDA operations; no state is converted to NumPy or transferred to
+the CPU for the calculation. A scalar final-finiteness check happens AFTER the
+timed interval. That check is not an accuracy or long-rollout stability guarantee.
+
+  import json
+  from spectral_transfer_torch import METHODS, benchmark_cuda_rollout
+
+  # Load/transfer model, statistics, coordinates and initial data BEFORE timing.
+  # u0: [8, C, 64, 64], for example; choose a single dtype for every method.
+  u0 = u0.to(device="cuda", dtype=torch.float32)
+  results = {}
+  for method in METHODS:
+      stepper = TorchTransferStepper(
+          physical_predict, lengths=(1.0, 1.0), h=0.05,
+          nu0=1.0e-3, nu=2.0e-3, method=method,
+      )
+      results[method] = benchmark_cuda_rollout(
+          stepper, u0, steps=50, warmup=3, repeats=10,
+          keep_trajectory=False,
+      )
+      assert all(n == 50 for n in results[method]["predict_calls_per_rollout"])
+  print(json.dumps(results, indent=2))
+
+The helper warms up using complete rollouts, including construction of cached
+symbols. Each timed repeat starts again from u0 using a device-side clone; the
+clone is included uniformly in every method's time. CUDA synchronization bounds
+the measured interval. The output is synchronized wall-clock time, INCLUDING
+Python launch overhead, not CUDA-kernel-only time. It excludes checkpoint loading,
+host/device input transfer, training and target-ground-truth generation.
+
+Use the SAME checkpoint, dtype, batch size, physical horizon, output storage
+policy, device residency, autocast/TF32 settings and model eval mode for every
+method. Mixed/half precision is not supported by the wrapper; do not change model
+output precision between methods. Benchmark method order should be counterbalanced
+in an actual study to reduce thermal/clock/order effects. Keep the GPU otherwise
+idle and record precision/determinism settings outside the helper.
+
+Returned fields include raw times, median, inclusive-quartile IQR, batch-step and
+amortized trajectory-step milliseconds, actual predict-call differences, device
+and software information, and peak allocated bytes. Absolute peaks include the
+resident model, input, cached symbols and other allocations on that CUDA device.
+Incremental peaks subtract the allocation baseline at the start of each repeat.
+These use torch.cuda memory_allocated, not reserved memory or total system VRAM.
+Output storage and final stacking are timed if keep_trajectory=True; keep this
+choice identical across competitors. This implementation does not report CPU
+timing as GPU timing and supplies NO measured speedup until actually executed.
+
+Original Recast integration
+---------------------------
+The v2 nonlinear-input equation is y = Phi(u + h*delta_nu*Delta(y)). It is NOT the
+affine outside-network equation y = Phi(u) + h*delta_nu*Delta(y). The latter is
+exactly the one-call implicit row above; it should not be benchmarked as a second,
+independent method requiring repeated identical network forwards.
+
+Do not claim to reproduce the v2 nonlinear-input solver without its actual
+vector-Aitken implementation and stopping policy. Obtain that code and expose a
+callable performing ONE complete physical Recast step. Count every invocation of
+the original network inside it, including initialization and residual evaluations.
+Record tolerance/denominator, relaxation, batch stopping, failed steps and iteration
+distribution. The same synchronized full-rollout timing pattern can then be used.
+An adapter exposing calls, method, h, nu0, nu and lengths can use the benchmark
+helper directly; its calls counter MUST count network evaluations inside the
+solver, not merely the outer Recast-step calls. No Aitken implementation is supplied
+here and no plain-Picard diagnostic should be relabeled as the paper's baseline.
+
+Required checks in a real PyTorch environment (NOT PERFORMED HERE)
+----------------------------------------------------------------
+1. Import the module with the intended PyTorch/CUDA versions.
+2. Check single Fourier modes and constant fields on non-unit, rectangular domains;
+   exercise 1D/2D, float32/float64, CPU/CUDA, and more than one channel.
+3. Verify strict source-viscosity recovery with a deterministic predictor and
+   confirm one callback call per step for all seven methods.
+4. With an exact linear-heat reference predictor, compare additive/Lie/Strang
+   against the target heat propagator; compare implicit against its equation.
+5. Compare small-shift and lower-viscosity additive cases to a high-precision
+   reference, including finite large-wave-number cases.
+6. Check normalization with the original physical wrapper, then use exactly the
+   same frozen checkpoint and paired initial conditions for every method.
+7. Validate target trajectories under spatial and temporal refinement. The
+   wrapper's FFT formula does not establish the accuracy of any data generator.
+8. Only after these checks, run the synchronized CUDA experiment and publish raw
+   timings/counters with hardware details. Do not present syntax compilation or
+   NumPy mathematical controls as evidence that these runtime checks passed.
+
+The only check executed for this module in the supplied environment is:
+  python -m py_compile spectral_transfer_torch.py

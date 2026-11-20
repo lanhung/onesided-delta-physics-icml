@@ -1,0 +1,745 @@
+{
+  "evidence_type": "independent controls; no original neural checkpoint or test trajectories",
+  "timestamp_utc": "2026-11-18T12:42:07.909613+00:00",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "logical_cpus": 9
+  },
+  "spectral_controls": {
+    "grids": [
+      {
+        "case": "NS64",
+        "equation_tested": "pure heat; named grid uses manuscript discretization parameters only",
+        "shape": [
+          64,
+          64
+        ],
+        "nu0": 0.001,
+        "h": 0.05,
+        "zero_shift_rel_error": {
+          "frozen": 0.0,
+          "delta": 0.0,
+          "explicit": 0.0,
+          "lie_post": 0.0,
+          "lie_pre": 0.0,
+          "strang": 0.0,
+          "implicit": 0.0
+        },
+        "pure_heat_rel_error": {
+          "delta": 3.198680902352842e-16,
+          "lie_post": 3.2312427069021137e-16,
+          "lie_pre": 3.2312427069021137e-16,
+          "strang": 4.40304692979605e-16
+        },
+        "lower_viscosity_additive_rel_error": 2.2710182839096633e-16,
+        "predictor_calls_per_step": {
+          "frozen": 1,
+          "delta": 1,
+          "explicit": 1,
+          "lie_post": 1,
+          "lie_pre": 1,
+          "strang": 1,
+          "implicit": 1
+        },
+        "constant_mode_max_abs_error": 0.0,
+        "implicit_equation_rel_residual": 4.598692121792896e-16,
+        "cached_affine_vs_closed_rel_error": 9.941127590573311e-13,
+        "cached_affine_iteration": {
+          "converged": true,
+          "iterations": 56,
+          "residual": 9.563064165920503e-13
+        },
+        "relaxation": 0.3309839013320888,
+        "raw_affine_picard_spectral_radius": 4.042589962686201,
+        "input_recast_picard_spectral_radius": 0.3678775889207396,
+        "input_recast_vs_its_linear_closed_form": 5.185454352852859e-13,
+        "input_recast_diagnostic": {
+          "converged": true,
+          "iterations": 27,
+          "calls": 28,
+          "residual": 5.865977638707924e-13
+        },
+        "input_recast_vs_external_implicit_rel_difference": 0.19964801880411434
+      },
+      {
+        "case": "NS128",
+        "equation_tested": "pure heat; named grid uses manuscript discretization parameters only",
+        "shape": [
+          128,
+          128
+        ],
+        "nu0": 0.001,
+        "h": 0.05,
+        "zero_shift_rel_error": {
+          "frozen": 0.0,
+          "delta": 0.0,
+          "explicit": 0.0,
+          "lie_post": 0.0,
+          "lie_pre": 0.0,
+          "strang": 0.0,
+          "implicit": 0.0
+        },
+        "pure_heat_rel_error": {
+          "delta": 3.508488588200288e-16,
+          "lie_post": 2.9486806125059036e-16,
+          "lie_pre": 2.9486806125059036e-16,
+          "strang": 3.791380776480121e-16
+        },
+        "lower_viscosity_additive_rel_error": 2.4935624237476523e-16,
+        "predictor_calls_per_step": {
+          "frozen": 1,
+          "delta": 1,
+          "explicit": 1,
+          "lie_post": 1,
+          "lie_pre": 1,
+          "strang": 1,
+          "implicit": 1
+        },
+        "constant_mode_max_abs_error": 0.0,
+        "implicit_equation_rel_residual": 1.239643532810686e-15,
+        "cached_affine_vs_closed_rel_error": 1.2107483662618746e-12,
+        "cached_affine_iteration": {
+          "converged": true,
+          "iterations": 193,
+          "residual": 9.520019270298666e-13
+        },
+        "relaxation": 0.11006936661840627,
+        "raw_affine_picard_spectral_radius": 16.170359850744806,
+        "input_recast_picard_spectral_radius": 0.3678775889207396,
+        "input_recast_vs_its_linear_closed_form": 5.107235022612824e-13,
+        "input_recast_diagnostic": {
+          "converged": true,
+          "iterations": 27,
+          "calls": 28,
+          "residual": 5.777381039205015e-13
+        },
+        "input_recast_vs_external_implicit_rel_difference": 0.210579846643617
+      },
+      {
+        "case": "Burgers64",
+        "equation_tested": "pure heat; named grid uses manuscript discretization parameters only",
+        "shape": [
+          64
+        ],
+        "nu0": 0.01,
+        "h": 0.02,
+        "zero_shift_rel_error": {
+          "frozen": 0.0,
+          "delta": 0.0,
+          "explicit": 0.0,
+          "lie_post": 0.0,
+          "lie_pre": 0.0,
+          "strang": 0.0,
+          "implicit": 0.0
+        },
+        "pure_heat_rel_error": {
+          "delta": 2.2012800289816414e-16,
+          "lie_post": 2.297365320100541e-16,
+          "lie_pre": 2.297365320100541e-16,
+          "strang": 2.398897640388074e-16
+        },
+        "lower_viscosity_additive_rel_error": 1.8306151004732644e-16,
+        "predictor_calls_per_step": {
+          "frozen": 1,
+          "delta": 1,
+          "explicit": 1,
+          "lie_post": 1,
+          "lie_pre": 1,
+          "strang": 1,
+          "implicit": 1
+        },
+        "constant_mode_max_abs_error": 0.0,
+        "implicit_equation_rel_residual": 8.194277500530908e-16,
+        "cached_affine_vs_closed_rel_error": 9.389378825168574e-13,
+        "cached_affine_iteration": {
+          "converged": true,
+          "iterations": 103,
+          "residual": 8.32344004815709e-13
+        },
+        "relaxation": 0.19831079016928382,
+        "raw_affine_picard_spectral_radius": 8.085179925372403,
+        "input_recast_picard_spectral_radius": 0.36750210993490584,
+        "input_recast_vs_its_linear_closed_form": 7.759166601700595e-13,
+        "input_recast_diagnostic": {
+          "converged": true,
+          "iterations": 26,
+          "calls": 27,
+          "residual": 9.407754831541497e-13
+        },
+        "input_recast_vs_external_implicit_rel_difference": 0.11263337223836237
+      }
+    ],
+    "energy_counterexample": {
+      "h_nu0_k2": 0.6931471805599453,
+      "nu_over_nu0": 2,
+      "correction_multiplier": -0.25,
+      "frozen_multiplier": -0.9,
+      "corrected_multiplier": -1.15,
+      "quadratic_form_uCu_at_u1": -0.25,
+      "frozen_energy_at_u1": 0.405,
+      "corrected_energy_at_u1": 0.6612499999999999
+    },
+    "one_mode_comparison": {
+      "a": 0.5,
+      "z": 0.5,
+      "frozen": 0.6065306597126334,
+      "target_heat": 0.36787944117144233,
+      "external_implicit": 0.40435377314175563,
+      "input_recast": 0.46539307523779727
+    }
+  },
+  "local_order": {
+    "description": "Six-dimensional nonlinear ODE with exact-reference numerical flow; not a neural checkpoint.",
+    "seed": 7,
+    "nu0": 0.17,
+    "nu": 0.3,
+    "L_diagonal": [
+      -0.0,
+      -0.7,
+      -1.6,
+      -3.0,
+      -5.0,
+      -8.0
+    ],
+    "mixing_matrix": [
+      [
+        0.0005022080052006423,
+        0.1219623549715407,
+        -0.11191631080305507,
+        -0.3635825956737256,
+        -0.18561857077021807,
+        -0.4048380108216849
+      ],
+      [
+        0.024553522942742215,
+        0.5471405828512448,
+        -0.20094246975375002,
+        -0.2533078171272274,
+        0.199977179585421,
+        0.14569851097010755
+      ],
+      [
+        0.043035186943924074,
+        -0.37986198858337783,
+        -0.01194200651358383,
+        0.2838563404916589,
+        -0.5487732909457903,
+        -0.18682085213398875
+      ],
+      [
+        -0.7761709333147165,
+        -0.5264515777558504,
+        -0.751885180665873,
+        -0.09597555236445458,
+        -0.5174328593038302,
+        0.11074321075273558
+      ],
+      [
+        0.06399336314269283,
+        -0.07631423857997392,
+        -1.027462849450801,
+        -0.21992045381441722,
+        -0.0198004280458688,
+        0.046258199830044096
+      ],
+      [
+        -0.6246753104451913,
+        -0.19504195820436226,
+        -0.39947874080289847,
+        -0.3302064202590112,
+        0.4331100493528323,
+        -0.32967465069453744
+      ]
+    ],
+    "initial_state": [
+      -0.009756511483656178,
+      0.26531696021495216,
+      -0.1750801298229906,
+      -0.03351058487524789,
+      0.03313924297484418,
+      0.019134532276518585
+    ],
+    "solver": "DOP853 rtol=2.5e-14 atol=1e-15 max_step=h/8",
+    "fit": "OLS log(error) against log(h), four smallest h values",
+    "fitted_local_orders": {
+      "frozen": 0.9982491628538899,
+      "delta": 1.99286526193728,
+      "explicit": 1.9913839985160589,
+      "lie_post": 1.9911106978404791,
+      "lie_pre": 1.9899163807790552,
+      "strang": 2.9902308921673826,
+      "implicit": 1.9839207586257939,
+      "delta_after_leading_term": 2.9947222279505734,
+      "lie_post_after_leading_term": 2.993790256282454
+    },
+    "rows": [
+      {
+        "h": 0.1,
+        "method": "frozen",
+        "absolute_l2_error": 0.005339262028144889
+      },
+      {
+        "h": 0.1,
+        "method": "delta",
+        "absolute_l2_error": 0.00032486490424865237
+      },
+      {
+        "h": 0.1,
+        "method": "explicit",
+        "absolute_l2_error": 0.0002559076853165584
+      },
+      {
+        "h": 0.1,
+        "method": "lie_post",
+        "absolute_l2_error": 0.00014155328430718027
+      },
+      {
+        "h": 0.1,
+        "method": "lie_pre",
+        "absolute_l2_error": 0.00013996337401619172
+      },
+      {
+        "h": 0.1,
+        "method": "strang",
+        "absolute_l2_error": 2.3859042870839358e-06
+      },
+      {
+        "h": 0.1,
+        "method": "implicit",
+        "absolute_l2_error": 8.49459427394608e-05
+      },
+      {
+        "h": 0.1,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 2.46395375142308e-05
+      },
+      {
+        "h": 0.1,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 1.3467381498292365e-05
+      },
+      {
+        "h": 0.05,
+        "method": "frozen",
+        "absolute_l2_error": 0.002688905242757321
+      },
+      {
+        "h": 0.05,
+        "method": "delta",
+        "absolute_l2_error": 8.398822894944005e-05
+      },
+      {
+        "h": 0.05,
+        "method": "explicit",
+        "absolute_l2_error": 6.66083444324624e-05
+      },
+      {
+        "h": 0.05,
+        "method": "lie_post",
+        "absolute_l2_error": 3.69010784100659e-05
+      },
+      {
+        "h": 0.05,
+        "method": "lie_pre",
+        "absolute_l2_error": 3.669046028834264e-05
+      },
+      {
+        "h": 0.05,
+        "method": "strang",
+        "absolute_l2_error": 3.12258490967732e-07
+      },
+      {
+        "h": 0.05,
+        "method": "implicit",
+        "absolute_l2_error": 2.2781660562304556e-05
+      },
+      {
+        "h": 0.05,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 3.157981559165756e-06
+      },
+      {
+        "h": 0.05,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 1.7334687125885405e-06
+      },
+      {
+        "h": 0.025,
+        "method": "frozen",
+        "absolute_l2_error": 0.0013497938559465315
+      },
+      {
+        "h": 0.025,
+        "method": "delta",
+        "absolute_l2_error": 2.135786866250309e-05
+      },
+      {
+        "h": 0.025,
+        "method": "explicit",
+        "absolute_l2_error": 1.699750181442215e-05
+      },
+      {
+        "h": 0.025,
+        "method": "lie_post",
+        "absolute_l2_error": 9.423269068432543e-06
+      },
+      {
+        "h": 0.025,
+        "method": "lie_pre",
+        "absolute_l2_error": 9.396157633149985e-06
+      },
+      {
+        "h": 0.025,
+        "method": "strang",
+        "absolute_l2_error": 3.995340002010704e-08
+      },
+      {
+        "h": 0.025,
+        "method": "implicit",
+        "absolute_l2_error": 5.911892848562376e-06
+      },
+      {
+        "h": 0.025,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 3.997693602814922e-07
+      },
+      {
+        "h": 0.025,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 2.1992408370796606e-07
+      },
+      {
+        "h": 0.0125,
+        "method": "frozen",
+        "absolute_l2_error": 0.0006763037082318834
+      },
+      {
+        "h": 0.0125,
+        "method": "delta",
+        "absolute_l2_error": 5.385494470130246e-06
+      },
+      {
+        "h": 0.0125,
+        "method": "explicit",
+        "absolute_l2_error": 4.293629721481483e-06
+      },
+      {
+        "h": 0.0125,
+        "method": "lie_post",
+        "absolute_l2_error": 2.381147532549756e-06
+      },
+      {
+        "h": 0.0125,
+        "method": "lie_pre",
+        "absolute_l2_error": 2.3777082281550806e-06
+      },
+      {
+        "h": 0.0125,
+        "method": "strang",
+        "absolute_l2_error": 5.05321144167289e-09
+      },
+      {
+        "h": 0.0125,
+        "method": "implicit",
+        "absolute_l2_error": 1.5066606491098983e-06
+      },
+      {
+        "h": 0.0125,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 5.0289660924723524e-08
+      },
+      {
+        "h": 0.0125,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 2.7696689020975798e-08
+      },
+      {
+        "h": 0.00625,
+        "method": "frozen",
+        "absolute_l2_error": 0.0003385128966204
+      },
+      {
+        "h": 0.00625,
+        "method": "delta",
+        "absolute_l2_error": 1.3521859103453468e-06
+      },
+      {
+        "h": 0.00625,
+        "method": "explicit",
+        "absolute_l2_error": 1.0790080671980927e-06
+      },
+      {
+        "h": 0.00625,
+        "method": "lie_post",
+        "absolute_l2_error": 5.984902098717206e-07
+      },
+      {
+        "h": 0.00625,
+        "method": "lie_pre",
+        "absolute_l2_error": 5.980571047538691e-07
+      },
+      {
+        "h": 0.00625,
+        "method": "strang",
+        "absolute_l2_error": 6.35388228239293e-10
+      },
+      {
+        "h": 0.00625,
+        "method": "implicit",
+        "absolute_l2_error": 3.803587155325536e-07
+      },
+      {
+        "h": 0.00625,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 6.306260277176831e-09
+      },
+      {
+        "h": 0.00625,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 3.475088358068026e-09
+      },
+      {
+        "h": 0.003125,
+        "method": "frozen",
+        "absolute_l2_error": 0.00016934790419831638
+      },
+      {
+        "h": 0.003125,
+        "method": "delta",
+        "absolute_l2_error": 3.3877672631273087e-07
+      },
+      {
+        "h": 0.003125,
+        "method": "explicit",
+        "absolute_l2_error": 2.704564482346588e-07
+      },
+      {
+        "h": 0.003125,
+        "method": "lie_post",
+        "absolute_l2_error": 1.500253081553511e-07
+      },
+      {
+        "h": 0.003125,
+        "method": "lie_pre",
+        "absolute_l2_error": 1.4997096914654978e-07
+      },
+      {
+        "h": 0.003125,
+        "method": "strang",
+        "absolute_l2_error": 7.965857576880054e-11
+      },
+      {
+        "h": 0.003125,
+        "method": "implicit",
+        "absolute_l2_error": 9.555829389901014e-08
+      },
+      {
+        "h": 0.003125,
+        "method": "delta_after_leading_term",
+        "absolute_l2_error": 7.895404404686573e-10
+      },
+      {
+        "h": 0.003125,
+        "method": "lie_post_after_leading_term",
+        "absolute_l2_error": 4.352023509427397e-10
+      }
+    ]
+  },
+  "burgers_control": {
+    "evidence_type": "numerical-reference control, NOT manuscript FNO results",
+    "reference_map": "nu0 pseudo-spectral RK4 flow, max_dt=0.0005; no learned network",
+    "grid": 64,
+    "length": 1.0,
+    "h": 0.02,
+    "nu0": 0.01,
+    "nu": 0.02,
+    "steps": 50,
+    "initial_condition_seeds": [
+      0,
+      1,
+      2
+    ],
+    "initial_rms": 0.5,
+    "initial_condition": "Four random sine/cosine modes with amplitudes divided by mode number; normalized RMS=0.5",
+    "training_seeds": null,
+    "truth_dt": 0.000125,
+    "truth_time_refinement_max_rel_l2": 1.7017394867758692e-11,
+    "reference_time_refinement_max_rel_l2": 1.4530768544067736e-10,
+    "spatial_convergence": "not established; this is a fixed-grid semidiscrete control",
+    "failure_policy": "First nonfinite value or max absolute field >1e4; remaining metrics missing, never omitted from failure count",
+    "summary": [
+      {
+        "method": "frozen",
+        "avg50_mean": 0.42560080572131564,
+        "step50_mean": 0.4700251856200044,
+        "avg50_per_ic": [
+          0.5578817895830173,
+          0.32006485059480083,
+          0.3988557769861286
+        ],
+        "step50_per_ic": [
+          0.5922303660072352,
+          0.41999269055434996,
+          0.39785250029842795
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      },
+      {
+        "method": "delta",
+        "avg50_mean": 0.01903142077330093,
+        "step50_mean": 0.01377704742210923,
+        "avg50_per_ic": [
+          0.021390269282029056,
+          0.018190597833635268,
+          0.017513395204238464
+        ],
+        "step50_per_ic": [
+          0.01535501805551428,
+          0.013813553750309541,
+          0.012162570460503869
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      },
+      {
+        "method": "explicit",
+        "avg50_mean": null,
+        "step50_mean": null,
+        "avg50_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "step50_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "failure_step": 15,
+        "failure_steps_per_ic": [
+          15,
+          18,
+          15
+        ],
+        "n_failed": 3,
+        "reference_propagator_calls": 50,
+        "status": "failed"
+      },
+      {
+        "method": "lie_post",
+        "avg50_mean": 0.009623327915157099,
+        "step50_mean": 0.008984911081025839,
+        "avg50_per_ic": [
+          0.009770211088649436,
+          0.009735056221957514,
+          0.009364716434864346
+        ],
+        "step50_per_ic": [
+          0.01006845318922912,
+          0.00967133747298279,
+          0.007214942580865603
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      },
+      {
+        "method": "lie_pre",
+        "avg50_mean": 0.009699532134219013,
+        "step50_mean": 0.00925767318860639,
+        "avg50_per_ic": [
+          0.010023114006023246,
+          0.009731219725861363,
+          0.009344262670772435
+        ],
+        "step50_per_ic": [
+          0.010449945748385456,
+          0.009932097763770876,
+          0.00739097605366284
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      },
+      {
+        "method": "strang",
+        "avg50_mean": 0.0005612352666484911,
+        "step50_mean": 0.0003750600681828404,
+        "avg50_per_ic": [
+          0.0007119796877984168,
+          0.0004487687590648318,
+          0.0005229573530822249
+        ],
+        "step50_per_ic": [
+          0.00044949270710962347,
+          0.00036389742606727685,
+          0.0003117900713716211
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      },
+      {
+        "method": "implicit",
+        "avg50_mean": 0.009803657406746791,
+        "step50_mean": 0.010486892417095934,
+        "avg50_per_ic": [
+          0.012312666682627572,
+          0.008466881140479556,
+          0.008631424397133249
+        ],
+        "step50_per_ic": [
+          0.012653362738032478,
+          0.01074558110512519,
+          0.008061733408130134
+        ],
+        "failure_step": null,
+        "failure_steps_per_ic": [
+          null,
+          null,
+          null
+        ],
+        "n_failed": 0,
+        "reference_propagator_calls": 50,
+        "status": "ok"
+      }
+    ],
+    "control_elapsed_seconds": 4.563726071000019
+  }
+}

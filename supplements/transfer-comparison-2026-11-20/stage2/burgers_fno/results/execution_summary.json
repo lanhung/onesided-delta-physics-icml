@@ -1,0 +1,30 @@
+{
+  "evidence_type": "independently_reconstructed_neural_not_manuscript_reproduction",
+  "completed": true,
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "test_ic_seeds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007
+  ],
+  "number_of_method_seed_ratio_runs": 147,
+  "number_of_per_ic_step_metric_rows": 58800,
+  "number_of_50step_trajectories": 1176,
+  "elapsed_seconds_exploratory_execution_not_benchmark": 100.42210487299963,
+  "original_manuscript_checkpoint_used": false,
+  "cuda_inference_executed": false,
+  "source_data_hash": "ec229364a770aba0b6d75e9ec4460247ed0d085cd209741526f8cdafad506424",
+  "normalization_hash": "4f4eaae182609ccecf5b8718fdf50e1f8b96ccf0ea804844c1b9423cd47c3bbe",
+  "config_hash": "6f333b9d2e0e16d4e54c676441c09b6790d2c0fa817b4177cb17830ee6234eae",
+  "script_hash": "3c917405577a61c56a2a486e38841d2cad95dad201b6f1e206d9e10a93385bb3",
+  "statistical_scope": "3 training seeds on one fixed source dataset, 8 common held-out ICs; descriptive mean/sampleSD"
+}

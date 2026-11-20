@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "evidence_type": "independently_reconstructed_neural",
+  "original_manuscript_reproduction": false,
+  "case": {
+    "training_seed": 0,
+    "viscosity_ratio": 2,
+    "steps": 50,
+    "test_initial_conditions": 8
+  },
+  "reference_dtype": "float64",
+  "model_inference_dtype": "float32",
+  "checks": [
+    {
+      "method": "frozen",
+      "avg_error_difference": 5.551115123125783e-17,
+      "step50_error_difference": 0.0,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    },
+    {
+      "method": "delta",
+      "avg_error_difference": 3.469446951953614e-18,
+      "step50_error_difference": 3.469446951953614e-18,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    },
+    {
+      "method": "explicit",
+      "avg_error_difference": null,
+      "step50_error_difference": null,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 8
+    },
+    {
+      "method": "lie_post",
+      "avg_error_difference": 0.0,
+      "step50_error_difference": 0.0,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    },
+    {
+      "method": "lie_pre",
+      "avg_error_difference": 0.0,
+      "step50_error_difference": 0.0,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    },
+    {
+      "method": "strang",
+      "avg_error_difference": 0.0,
+      "step50_error_difference": 0.0,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    },
+    {
+      "method": "implicit",
+      "avg_error_difference": 0.0,
+      "step50_error_difference": 0.0,
+      "actual_batched_network_forwards": 50,
+      "rollout_bitwise_equal_including_nan": true,
+      "failed_trajectories": 0
+    }
+  ]
+}
